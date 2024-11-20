@@ -1,0 +1,175 @@
+
+   
+    {% extends 'dashboard.html' %}
+
+    {% block content %}
+    
+    <!-- Formulario combinado de Cliente y Dispositivo -->
+    <form id="clien" action="{{ url_for('main.register_cliente_dispositivo') }}" method="post">
+        <div class="clien">
+            <!-- Datos del Cliente -->
+            <fieldset class="fiel">
+                <legend>Datos del Cliente y Dispositivo</legend>
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div>
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" required>
+            </div>
+            <div>
+                <label for="nit">NIT:</label>
+                <input type="text" id="nit" name="nit" required>
+            </div>
+            <div>
+                <label for="correo">Correo:</label>
+                <input type="email" id="correo" name="correo" required>
+            </div>
+            <div>
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" required>
+            </div>
+            <div>
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono" name="telefono" required>
+            </div>
+            <div>
+                <label for="fechaIngreso">Fecha de Ingreso:</label>
+                <input type="date" id="fechaIngreso" name="fechaIngreso" required>
+            </div>
+            </fieldset>
+        </div>
+
+       
+            <!-- Datos del Dispositivo -->
+            <fieldset id="dispo">
+               
+                
+                <div>
+                <label for="IMEI">IMEI del telefono:</label>
+                <input type="text" id="Imei" name="indice" required>
+                </div>
+                <div>
+                <label for="marca">Marca:</label>
+                <select id="maraca" name="marca" required>
+                    <option value="">Seleccionar...</option>
+                    <option value="Iphone">Iphone</option>
+                    <option value="Samgung">Samsung</option>
+                    <option value="Motorola">Motorola</option>
+                    <option value="Huawei">Huawei</option>
+                    <option value="Oppo">Oppo</option>
+                    <option value="Alcatel">Alcatel</option>
+                    <option value="Zt">zt</option>
+                </select>
+                </div>
+                <div>
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" name="modelo" required>
+            </div>
+            
+            <div>
+                <label for="per_recibe">Persona que recibe:</label>
+                <select id="per_recibe" name="per_recibe" required>
+                    <option value="">seleccionar...</option>
+                    <option value="Julian">Julian</option>
+                    <option value="Camila">Camila</option>
+                    <option value="Manuel">Manuel</option>
+                  
+                </select>
+            </div>
+            <div>
+                <label for="clave_tel">Clave del teléfono:</label>
+                <input type="text" id="clave_tel" name="clave_tel" required>
+            </div>
+            <div>
+                <label for="abono">Abono:</label>
+                <input type="text" id="abono" name="abono" required>
+            </div>
+            <div>
+                <label for="detalles">Detalles del dispositivo:</label>
+                <textarea id="detalles" name="detalles" required></textarea>
+            </div>
+            <div>
+                <label for="estado">Estado:</label>
+                <input type="text" id="estado" name="estado">
+
+            </div>
+            
+            <div>
+                <label for="color">Color:</label>
+                <select id="color" name="color" required>
+                    <option value="amarillo">Amarillo</option>
+                    <option value="verde">Verde</option>
+                    <option value="azul">Azul</option>
+                    <option value="rojo">Rojo</option>
+                </select>
+            </div>
+            <div>
+                <label for="enciende">Enciende:</label>
+                <select id="enciende" name="enciende" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div>
+                <label for="display_quebrado">Display quebrado:</label>
+                <select id="display_quebrado" name="display_quebrado" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div>
+
+                <label for="tapa_quebrada">Estado de la tapa:</label>
+                <select id="tapa" name="tapa_quebrada" required>
+                    <option value="buena">Buena</option>
+                    <option value="quebrada">Quebrada</option>
+                </select>
+            </div>
+            <div>
+                <label for="botones">¿Trae botones?</label>
+                <select id="botones" name="botones" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div>
+                <label for="bandeja_sim">¿Tiene bandeja de SIM card?</label>
+                <select id="bandeja_sim" name="bandeja_sim" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div>
+                <label for="estuche">¿Trae estuche?</label>
+                <select id="estuche" name="estuche" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div>
+                <label for="simcard">¿Trae SIM card?</label>
+                <select id="simcard" name="simcard" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            
+           
+            </fieldset>
+            <div class="but">
+            <button class="guarda" type="submit">Registrar Cliente y Dispositivo</button>
+            <button class="cancelar" type="reset">Cancelar</button>
+            </div>
+        </div>
+
+        <!-- Botones -->
+        
+            
+        
+    </form>
+   
+
+    {% endblock %}
+    

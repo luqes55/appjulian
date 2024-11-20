@@ -1,0 +1,783 @@
+/* static/css/styles.css */
+
+/*
+body.loginn {
+    background-image: url('/static/images/');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    margin: 0;
+}
+    */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 5px;
+        box-sizing: border-box;
+        
+        
+    }
+    .container {
+        width: 85%; 
+        height: auto;              
+        max-width: auto; 
+        margin:0;            
+        padding: 10px;             
+        text-align: center;       
+        position: relative;        
+        left: 200px;                
+        top: 15px; 
+       
+        border-radius: 10px;  
+        box-shadow: rgba(11, 10, 10, 0.864);
+                    
+    }
+
+/*estylos para el alert de credenciales incorrectas*/
+
+.flash-messages .alert {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.alert-success {
+    background-color: #28a745;
+}
+
+.alert-danger {
+    background-color: #dc3545;
+}
+
+.alert-info {
+    background-color: #17a2b8;
+}
+
+.alert-warning {
+    background-color: #ffc107;
+}
+
+
+
+
+body.loginn{
+    background-color: #ebf1eb;
+}
+/* Estilo para los encabezados */
+h1 {
+    color: #193af6;
+    text-decoration: none;
+    margin-left: 0px;
+}
+p{
+    color: #2c9d92;
+}
+
+h3{
+    color: #274d67;
+    position: relative;
+    top:10px;
+    
+    font-size: 30px;
+}
+
+a{
+    text-decoration: none;
+}
+h1.presentacion{
+    color: #184ac7;
+    text-decoration: none;
+    margin-top: 20px;
+    
+    
+}
+h1.dasbo{
+    color: #e8eaf1;
+    text-decoration: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 38px;
+}
+
+
+/*
+.das a img{
+    width: 170px;
+    position: absolute;
+    left:122px;
+}
+    */
+/* estilo para el  prefil del usuario*/
+/*.profi{
+   width: 25%;
+   height: 30px;
+   border-radius: 5px;
+   text-align: center;
+   justify-content: start;
+   
+
+}*/
+
+
+
+
+.power{
+    width: 70px;
+    
+    margin-left: 70px;
+    justify-content: center;
+    color: #ddd;
+    font-size: 16px;
+    text-align: center;
+
+}
+
+.power img{
+    margin-top: 10px;
+    
+}
+
+.per{
+    width: 40px;
+    height: 40px;
+    background: #cbcedb;
+    border-radius: 50%;
+    position: relative;
+    top: 10px;
+    left: 30px;
+    
+}
+.per span{
+    position:absolute;
+    top: 70px;
+    left: 45px;
+    background-color: #fefeff;
+    width: auto;
+    border-radius: 5px;
+    color: #0e29f9;
+    font-size: 17px;
+}
+
+.profile-pic{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    left: -25px;
+    top: -20px;
+}
+
+span{
+    color: #f8fcfb;
+    position: relative;
+    top: -50px;
+    left: 90px;
+    
+}
+.page-title{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 3vw;
+    text-align: center;
+    color: #204850;margin: 0%;
+    
+}
+/* Estilo para los formularios */
+form {
+    
+    width: 500px;
+    height: 200px;
+    margin: 100px 200px 100px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    text-align: center;
+}
+form.logi{
+    width: 500px;
+    height: 280px;
+    margin: 100px 500px 100px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    text-align:start;
+    background: linear-gradient(to bottom, #2c3e50, #4a6075);
+
+
+/* estilo para los input de el login*/
+    
+}form.logi h1 {
+    text-align: center;
+    color: #fff;
+    
+}
+ label[for="usuario"],label[for="password"]{
+    color: #fff ;
+}
+form.logi input{
+    width: 96% !important;
+}
+button.log{
+    padding: 10px 20px;
+    background-color: #2e3a6a;
+    color: #fff;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 180px;
+}
+
+button.bus{
+    padding: 10px 20px;
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 180px;
+}
+
+form.busqueda{
+    display: flex;
+    justify-content: center;
+    float: right;
+    width: 400px;
+    height: auto;
+    padding: 5px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+
+    
+    
+    
+}
+form.busqueda input{
+    width: 95% !important;
+    
+}
+
+#buscal{
+    
+    width: 70px;
+    height: 40px;
+    padding: 5px ;
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin:7px;
+    
+}
+
+
+
+
+
+
+
+
+
+/*
+form.clien1{
+    
+    position: relative;
+    left:600px;
+    bottom: 830px;
+    width: 500px;
+    height: 670px;
+    margin: 20px 10px 100px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: start;
+}*/
+
+
+
+
+
+
+input[type="text"], input[type="password"], input[type="email"], input[type="number"], textarea {
+    width: 35%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+form .clien input  {
+    width:100px ;
+    height: 10px;
+}
+form .clien1 input{
+    width: 50px;
+    height: 20px;
+    margin-bottom: 6px;
+}
+textarea{
+    width: 50px;
+    height: 20px;
+}
+
+
+
+/* Estilo para los botones */
+button {
+    padding: 10px 20px;
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 180px;
+}
+button.buscaCliente{
+    padding: 10px 20px;
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left:180px ;
+}
+
+
+
+
+a.cancel{
+    text-decoration: none;
+    color: white;
+}
+
+
+button:hover {
+    background-color: #4c5bae;
+}
+
+/*estilo para el boton de apagar*/
+
+
+
+
+/*Estilos de la tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+table th {
+    background-color: #274d67;
+    color: #fff;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tr:hover {
+    background-color: #ddd;
+}
+
+/* Form Styles */
+form {
+    margin: 10px;
+    justify-content: center;
+   
+}
+
+.form-regis{
+    
+    background-color: #0F72CD;
+    width: auto;
+    max-width: 450px;
+    height: auto;
+    position: relative;
+    left: 29%;
+    top: 70px;
+    
+    
+    
+}
+.form-regis h1,label{
+    width: 400px;
+    height: auto;
+    margin: 10px;
+    
+}
+.form-regis input{
+    width: 400px;
+    float: left;
+    margin: 10px;
+
+}
+.form-regis button{
+    margin:0;
+}
+
+
+
+
+
+form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+form input, form button {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+form button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    
+}
+
+form button:hover {
+    background-color: #0e29f9;
+}
+
+
+/*nuevo*/
+
+/* Estilos generales */
+
+/* Contenedor principal */
+
+
+/* Barra Lateral de Navegación */
+.sidebar {
+    width: auto; 
+    max-width: 500px; 
+    height: 60px; 
+    background-color: #bfcbd7;
+    color: #4a5567;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    border-radius: 0px 0px 30px 30px;
+    position: relative;
+    left: 38%;
+    
+}
+
+@media (max-width: 870px) {
+    .sidebar {
+        width: 100%; /* Asegura que la barra ocupe el 100% del ancho en dispositivos pequeños */
+        height: 50px;  /* Reducir la altura en dispositivos pequeños */
+        margin-left: 0;  /* Eliminar margen en dispositivos pequeños */
+        padding: 8px; /* Ajustar el padding si es necesario */
+        flex-direction: column;  /* Colocar los elementos en una columna si es necesario */
+        align-items: center;  /* Centrar los elementos en la barra lateral */
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        height: 40px;  /* Ajustar más la altura en pantallas aún más pequeñas */
+        flex-direction: column;
+        padding: 5px;
+    }
+}
+
+
+
+
+
+
+
+
+
+/*estilos para el nav de las paginas */
+
+.nav{
+    padding:  0px;
+    text-align: center;
+     background-color: #2245f3;
+     width:1300px;
+     height: 45px;
+     border-radius: 20px 20px;
+     position: relative;
+     left: 140px;
+     
+}
+
+.user{
+    width: 200px;
+}
+
+/* Área de Contenido Principal de los template */
+.main-content {
+    display: grid;
+    padding: 0px 5px;
+    
+    width:126vh;
+    height:86vh ;
+    position:absolute;
+    top: 100px;
+    left: 320px;
+    
+    justify-content: center;
+   
+}
+
+/* Estilo para mensajes flash */
+.flashes {
+    margin: 30px 0;
+}
+
+.flash {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    color: #fdfcfc;
+}
+
+.flash.success {
+    background-color: #28a745;
+}
+
+.flash.danger {
+    background-color: #dc3545;
+}
+
+.flash.warning {
+    background-color: #f37a09;
+}
+
+.flash.info {
+    background-color: #17a2b8;
+}
+
+
+ p{
+    font-size: 18px;
+    position: relative;
+    top: 330px;
+    color: #417e0f;
+}
+.rest{
+    display: block;
+    height: 57px;
+    position:absolute;
+    bottom: -4px;
+    left: -4px;
+    
+}
+.res{
+    width: 49px;
+    height: 48px;
+    position: relative;
+    left: 110px;
+    top: 1px;
+    border-radius: 33px;
+}
+
+
+
+/* Estilos para los enlaces dentro de los <li> */
+li a {
+    width: auto;
+    display: block;
+    color: white; /* Color del texto */
+    text-align: center;
+    padding: 14px 16px; /* Espaciado interno de los enlaces */
+    text-decoration: none; /* Quitar el subrayado */
+    font-family: Arial, sans-serif; /* Fuente personalizada */
+    border-radius: 15px 15px 0px;
+    position: relative;
+    left: 11px;
+}
+
+/* Cambiar el color de fondo al pasar el mouse*/
+li a:hover {
+    background-color: #0e29fa; 
+}
+
+/* Cuando el enlace esté activo o se haya hecho clic */
+li a:active,li a:active {
+    background-color: #0e29fa; /* Color de fondo para el enlace activo */
+    color: white; /* Color del texto para el enlace activo */
+}
+
+/* Estilos para pantallas más pequeñas (responsivo) */
+@media (max-width: 600px) {
+    li {
+        float: none; /* Los elementos se alinean verticalmente en pantallas pequeñas */
+    }
+
+    li a {
+        text-align: left; /* Alinear el texto a la izquierda en pantallas pequeñas */
+        padding: 10px; /* Reducir el espaciado interno */
+    }
+}
+
+
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    z-index: 9999;
+    
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 600px;
+    text-align: center;
+    position: relative;
+    top: 100px;
+    left: 350px;
+    
+}
+
+
+.modal-content input{
+    width: 90%;
+    
+    
+}
+
+.modal-content h2{
+    color: #0e29f9;
+}
+.can{
+    margin: auto;
+}
+.validar{
+    margin-top: 20px;
+    position: relative;
+    left: -200px;
+    background-color: #28a745;
+    
+}
+.cancel{
+    background-color: red;
+    margin-top: 20px;
+    position: relative;
+    left: -40px;
+}
+
+
+.modal.modal-content{
+    overflow: hidden;
+}
+#passwordInput {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* css para el panel admin */
+
+/* Estilo para la barra lateral .admin */
+.admin {
+    width: 180px;
+    height: 96vh;
+    position: fixed;
+    top: 7px;
+    left: 10px;
+    background: #f3f5f7;
+    margin-right: 10px;
+    display: flex;
+    flex-direction:row;
+    align-items: center;  
+    padding:0px;
+    transition: all 0.1s ease; 
+    border-radius: 30px;
+}
+
+/* Estilo para la parte del perfil .per */
+.admin .per {
+    width: 60px;
+    height: 60px;
+    align-items: center;
+    margin:40px;
+   
+   
+}
+
+.admin .per img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    position: relative;
+    right: 0px;
+    left: 3px;
+   
+}
+
+/* Estilo para los iconos y texto dentro de .admin */
+.admin span {
+    position: relative;
+    top: 0px;
+    left: 6px;
+    font-size: 16px;   
+    color: #333;
+    display: inline-block;  
+    transition: opacity 0.1s ease;
+}
+.admin button{
+    width: 140px;
+    background-color: #374072;
+    position: absolute;
+    right:18px;
+    bottom: -140px;
+    
+    
+}
+.admin button a{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    color: #fbfbff;
+}
+
+.admin a{
+    color: #0f0f13;
+    font-size: 20px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    width: 80%;
+}
+ .admin li{
+    list-style-type: none;
+    margin: 0;
+    width: auto;
+    
+ }
+ .admin ul{
+    position: relative;
+    right: 10px;
+    margin: 0;
+    padding: 0;
+    width:200px;
+ }
+

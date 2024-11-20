@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+</head>
+<body>
+    <div class="container">
+        <!-- Barra Lateral de Navegación -->
+        <nav class="sidebar">
+            <div class="das">
+                <a href="{{ url_for('main.dashboard') }}">
+                    <img src="{{ url_for('static', filename='images/logoPanel.png') }}" alt="Descripción de la imagen">
+                
+                </a>
+            </div>
+            <ul>
+                <li><a href="{{ url_for('main.inicio') }}">Inicio</a></li>
+                <li><a href="{{ url_for('main.register_cliente_dispositivo') }}">Registrar Cliente</a></li>
+                <li><a href="{{ url_for('main.buscar') }}">Buscar</a></li>
+                <li><a id="openPinButton" href="#">Acceder a Registro</a></li>
+               
+            </ul>
+            <div id="pinModal" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <h2>Ingrese su PIN</h2>
+                    <form action="{{ url_for('main.validate_pin') }}" method="POST">
+                        <input type="password" name="pin" placeholder="PIN" required>
+                        <button type="submit">Validar</button>
+                        <button type="button" id="closeModal">Cancelar</button>
+                        <p style="color:red; display:none;" id="errorMessage">PIN incorrecto</p>
+                    </form>
+                </div>
+            </div>
+
+
+
+                <div class="profi">
+                        <button class="per">
+                             <img class="profile-pic" src="{{ url_for('static', filename='images/admin.png') }}" alt="Perfil" >
+                        </button>
+                <span>{{ current_user.usuario }}</span>
+                <div>
+                    
+            <a  class="power" href="{{ url_for('main.logout') }}">
+            <img src="{{ url_for('static', filename='images/apagar.png') }}">
+            </a>
+        </nav>
+
+        <!-- Área de Contenido Principal -->
+        <div class="main-content">
+            <nav class="nav">
+                <h1 class="page-title">{{ page_title }}</h1>
+            </nav>
+            <!-- Mensajes Flash -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flashes">
+                        {% for category, message in messages %}
+                            <div class="flash {{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <!-- Contenido Dinámico -->
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

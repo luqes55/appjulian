@@ -1,0 +1,42 @@
+<!-- templates/register.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>registro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    {% extends 'dashboard.html' %}
+
+{% block content %}
+    <h1 >registro de nuevo usuario</h1>
+    <form method="POST" action="{{ url_for('main.register_user') }}">
+        <label for="usuario">Usuario:</label>
+        <input type="text" name="usuario" required><br>
+    
+        <label for="password">Contraseña:</label>
+        <input type="password" name="password" required><br>
+        
+        <label for="pin" >cree un pin</label>
+        <input type="password" name="pin" placeholder="1234.." required>
+        <button type="submit">Registrar</button>
+    </form>
+    {% endblock %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
+
+
+

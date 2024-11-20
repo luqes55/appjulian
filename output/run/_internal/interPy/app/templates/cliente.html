@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Cliente y Dispositivo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+   
+    {% extends 'dashboard.html' %}
+
+    {% block content %}
+    
+    <!-- Formulario combinado de Cliente y Dispositivo -->
+    <form  id="clien" action="{{ url_for('main.register_cliente_dispositivo') }}" method="post">
+        
+       <div class="clien">
+
+        <!-- Datos del Cliente -->
+        <fieldsed class="fiel">
+            <legend>Datos de el Cliente</legend>
+            
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos" required>
+            
+            <label for="nit">NIT:</label>
+            <input type="text" id="nit" name="nit" required>
+            
+            <label for="correo">Correo:</label>
+            <input type="email" id="correo" name="correo" required>
+            
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" required>
+            
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" name="telefono" required>
+            
+           
+        </fieldset>
+    </div>
+    
+    <div class="clien1">
+    <!-- Datos del Dispositivo -->
+        <fieldsed id="dispo">
+            <legend>Datos de el Dispositivo</legend>
+
+            <label for="estado">IMEI:</label>
+            <input type="text" id="imei" name="imei" required>
+
+            <label for="marca">Marca:</label>
+            <input type="text" id="marca" name="marca" required>
+            
+            <label for="modelo">Modelo:</label>
+            <input type="text" id="modelo" name="modelo" required>
+            
+            <label for="Detalles">Detalles del dispositivo:</label>
+            <textarea id="Detalles" name="Detalles" required></textarea>
+
+            <label for="per_recibe">persona que recibe:</label>
+            <input type="text" id="per_recibe" name="per_recibe" required>
+
+            <label for="clave_tel">clave de el telefono:</label>
+            <input type="text" id="clave_tel" name="clave_tel" required>
+
+            <label for="estado">Abono:</label>
+            <input type="text" id="abono" name="abono" required>
+
+            <label for="fechaIngreso">Fecha de Ingreso:</label>
+            <input type="date" id="fechaIngreso" name="fechaIngreso" required>
+
+            
+        </fieldset>
+
+        <!-- Botones -->
+         
+    </form>
+    <button class="guarda" type="submit">Registrar Cliente y Dispositivo</button>
+        <button class="cancelar" type="reset">Cancelar</button>
+</div>
+    {% endblock %}
+    
+</body>
+</html>

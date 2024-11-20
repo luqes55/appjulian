@@ -1,0 +1,76 @@
+
+   
+   
+
+    {% extends 'dashboard.html' %}
+
+   
+    {% block content %}
+
+
+    
+
+    
+    <form class="busqueda" method="GET" action="{{ url_for('main.buscar') }}">
+        
+        <input type="text" name="query" placeholder="Buscar por nombre o NIT" required>
+        <button id="buscal" type="submit">Buscar</button>
+    </form>
+    
+
+    
+
+
+    {% if cliente_results %}
+        <h2>Resultados de búsqueda</h2>
+        <tr>
+            <td>Registros encontrados: {{ cliente_results|length }}</td>
+        </tr>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>apellidos</th>
+                    <th>NIT</th>
+                    <th>Correo</th>
+                    <th>direccion</th>
+                    <th>Telefono</th>
+                    <th>Fecha de registro</th>
+                    <th>Imei telefono</th>
+                    <th>marca</th>
+                    <th>abono</th>
+                    <th>estado</th>
+
+                    <!-- Añadir más columnas según sea necesario -->
+                </tr>
+
+            </thead>
+            <tbody>
+                {% for result in cliente_results %}
+                <tr>
+                    <td>{{ result.idCliente }}</td>
+                    <td>{{ result.nombre }}</td>
+                    <td>{{ result.apellidos}}</td>
+                    <td>{{ result.nit }}</td>
+                    <td>{{ result.correo }}</td>
+                    <td>{{ result.direccion}}</td>
+                    <td>{{ result.telefono}}</td>
+                    <td>{{ result.fechaIngreso}}</td>
+                    <td>{{ result.Imei}}</td>
+                    <td>{{ result.marca}}</td>
+                    <td>{{ result.abono}}</td>
+                    <td>{{ result.estado}}</td>
+                    <!-- Añadir más columnas según sea necesario -->
+                </tr>
+                
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+   
+    {% endblock %}
+    
+
+
+

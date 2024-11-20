@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_form_registro.css') }}">
+  
+</head>
+<body>
+    <nav class="sidebar">
+        
+            
+            <div class="profi">
+                <!--
+                
+                -->
+                <h1 class="page-title">{{page_title }}</h1>
+                
+            </div>
+            <!--
+            <a href="{{ url_for('main.dashboard') }}">
+                <img src="{{ url_for('static', filename='images/logoPanel.png') }}" alt="Descripción de la imagen">
+            
+            </a>
+        -->
+        
+       
+          
+    </nav>
+    <div class="container">
+        <!-- Barra Lateral de Navegación -->
+        
+            <div id="pinModal" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <h2>Ingresa su PIN de acceso</h2>
+                    <form class="can" action="{{ url_for('main.validate_pin') }}" method="POST">
+                        <input type="password" name="pin" placeholder="PIN" required>
+                        <button class="cancel" type="button" id="closeModal">Cancelar</button>
+                        <button class="validar" type="submit">Validar</button>
+                        <p style="color:red; display:none;" id="errorMessage">PIN incorrecto</p>
+                    </form>
+                </div>
+            </div>
+
+        
+        <!-- 
+        <nav class="nav">
+            <h1 class="page-title">{{ page_title }}</h1>
+        </nav>
+       Área de Contenido Principal -->
+       
+            
+            
+            <!-- Mensajes Flash -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flashes">
+                        {% for category, message in messages %}
+                            <div class="flash {{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <!-- Contenido Dinámico -->
+            {% block content %}{% endblock %}
+    </div>
+        <div class="admin">
+            <ul>
+                <li><a href="{{ url_for('main.inicio') }}">Inicio</a></li>
+                <li><a href="{{ url_for('main.register_cliente_dispositivo') }}">Registrar Cliente</a></li>
+                <li><a href="{{ url_for('main.buscar') }}">Buscar</a></li>
+                <li><a id="openPinButton" href="#">Acceder a Registro</a></li>
+            
+
+            <li class="per">
+                <img src="{{ url_for('static', filename='images/admin.png') }}" alt="Perfil" >
+               <span>{{ current_user.usuario }}</span>
+            </li>
+           <button> <a href="{{ url_for('main.logout') }}">cerrar sessión</a></button>
+
+        </ul>
+            
+        </div>
+    
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

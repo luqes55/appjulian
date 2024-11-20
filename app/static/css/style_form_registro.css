@@ -1,0 +1,210 @@
+/* Contenedor principal (padre) de los elementos */
+
+
+/* Elemento #clien */
+#clien {
+    width: auto;     
+    height: auto;           
+    background-color: #f4f4f4;  
+    padding: 20px;         
+    box-sizing: border-box; 
+    border-radius: 10px;
+    position: relative;
+        
+}
+
+
+
+/* Media Query para pantallas más pequeñas */
+@media (max-width: 1350px) {
+    .container {
+        flex-direction: column;    /* Apilar los elementos verticalmente en pantallas pequeñas */
+        align-items: center;       /* Centra los elementos en el contenedor */
+        margin: 20px;              /* Agregar un pequeño margen en dispositivos más pequeños */
+        left: 10px;                /* Reducir el espacio a la izquierda en pantallas más pequeñas */
+        top: 20px;                 /* Reducir el espacio superior */
+    }
+}
+
+@media (max-width: 870px) {
+    .container {
+        left: 0;                /* Eliminar margen izquierdo en pantallas más pequeñas */
+        top: 10px;              /* Ajustar top en pantallas pequeñas */
+        margin: 10px 20px;      /* Agregar margen para separación en dispositivos pequeños */
+        padding: 10px;          /* Reducir el padding en pantallas pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        left: 0;                /* Alineación completamente al borde izquierdo en pantallas muy pequeñas */
+        top: 10px;              /* Mantener el espacio en la parte superior */
+        padding: 5px;           /* Reducir padding en dispositivos muy pequeños */
+    }
+}
+
+
+/* Contenedor principal .clien */
+.clien {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos dentro de .clien se acomoden */
+    justify-content: space-between;
+    height: auto;
+    position: relative;
+    margin: 0;
+}
+
+/* Estilo para los campos dentro de .fiel (input, textarea, select) */
+.fiel {
+    display: flex;
+    flex-wrap:wrap;    /* Permite que los elementos dentro de .fiel se acomoden */
+    justify-content: space-between;
+    margin: 0;
+    width: 100%;
+}
+.fiel label{
+    width: auto;
+}
+.fiel div{
+    width: auto;
+}
+
+/* Estilo para el contenedor #dispo */
+#dispo {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px;   /* Hace que los campos se ajusten a varias líneas */
+    justify-content: space-between;
+    margin-top: 5px;
+    width: 98%;        /* Asegura que el contenedor #dispo ocupe el 100% del espacio */
+    border: none;
+}
+#dispo label{
+    width: auto;
+}
+
+/* Estilos para los inputs y selects dentro de #dispo */
+#dispo input{
+    margin: 10px;
+    width: 58%;          /* Ajustamos el ancho a un porcentaje, para que se acomoden */
+    height: 35px;
+    border: solid 1px black;
+    border-radius: 4px;  /* Redondeamos los bordes para un diseño más suave */
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+ #dispo div select{
+    
+    width: auto;          /* Ajustamos el ancho a un porcentaje, para que se acomoden */
+    height: 35px;
+    border: solid 1px black;
+    border-radius: 4px;  /* Redondeamos los bordes para un diseño más suave */
+    box-sizing: border-box;
+}
+
+/* Estilo para el textarea dentro de #dispo */
+#dispo textarea {
+    width: 500px;          /* El textarea ocupará todo el ancho disponible */
+    height: 150px;
+    border: solid 1px black;
+    margin: 10px 0;       /* Agrega espacio arriba y abajo del textarea */
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Estilo para el botón */
+.but {
+    margin-top: 10px;
+    text-align: center; 
+    width: 550px;  /* Centra el botón en pantallas pequeñas */
+    margin: 0 auto;
+}
+
+button.guarda {
+    margin: -120px;
+    background-color: rgb(20, 77, 236);
+    font-size: 17px;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Media Query para pantallas más pequeñas (máximo 768px) */
+@media (max-width: 768px) {
+    /* Ajustes para .clien y .fiel en pantallas pequeñas */
+    .clien {
+        flex-direction: column; /* Los elementos dentro de .clien se apilan verticalmente */
+        align-items: center;    /* Centra los elementos dentro del contenedor */
+    }
+
+    .fiel {
+        width: 100%;            /* Asegura que .fiel ocupe el 100% de ancho */
+        flex-direction: column; /* Acomoda los campos de formulario verticalmente */
+        align-items: center;    /* Centra los campos */
+    }
+
+    /* Ajusta los inputs, selects y textarea */
+    #dispo input,
+    #dispo select,
+    #dispo textarea {
+        width: 100%;            /* Asegura que los inputs y textarea ocupen el 100% del ancho */
+        margin: 10px 0;         /* Añade márgenes verticales */
+    }
+
+    /* Ajuste del botón */
+    button.guarda {
+        width: 100%;            /* Hace que el botón ocupe el 100% en pantallas pequeñas */
+        text-align: center;     /* Centra el texto dentro del botón */
+    }
+}
+
+/* Media Query para pantallas muy pequeñas (máximo 480px) */
+@media (max-width: 480px) {
+    /* Ajustes adicionales para pantallas aún más pequeñas */
+    #dispo input,
+    #dispo select {
+        width: 100%; /* Los inputs y selects ocupan el 100% */
+        margin: 8px 0; /* Ajuste de márgenes */
+    }
+
+    #dispo textarea {
+        width: 100%;    /* El textarea ocupa todo el ancho disponible */
+        margin: 8px 0;   /* Ajuste de márgenes */
+    }
+
+    button.guarda {
+        width: 100%;    /* El botón ocupa el 100% del ancho en pantallas muy pequeñas */
+        padding: 12px 0; /* Aumentamos el tamaño del padding para mejorar la accesibilidad */
+    }
+}
+
+
+button.cancelar{
+    background-color: red;
+    font-size: 17px;
+}
+
+button.guarda:hover{
+    background-color: green;
+}
+
+button.cancelar:hover{
+    background-color: green;
+}
+.verifi{
+   
+}
+
+.clien1{
+   
+}
+
+
+.clien1 #dispo textarea{
+    
+}
+legend{
+    font-size: 30px;
+}
+
