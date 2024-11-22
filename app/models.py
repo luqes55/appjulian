@@ -25,13 +25,13 @@ class Dispositivo(db.Model):
     marca = db.Column(db.String(45), nullable=False)
     modelo = db.Column(db.String(45), nullable=False)
     detalles = db.Column(db.String(255), nullable=False)
-    IMEI = db.Column(db.String(15), nullable=False)
+    Imei = db.Column(db.String(15), nullable=True)
     per_recibe= db.Column(db.String(45), nullable=False)
     clave_tel=db.Column(db.String(45), nullable=False)
     abono= db.Column(db.Numeric(10, 2), nullable=False)
     color = db.Column(db.String(20), nullable=False)
     enciende = db.Column(db.String(3), nullable=False)  # asumiendo que 'si' o 'no'
-    display_quebrado = db.Column(db.String(3), nullable=False)  # asumiendo que 'si' o 'no'
+    display_quebrado = db.Column(db.String(10), nullable=True)  # asumiendo que 'si' o 'no'
     tapa_quebrada = db.Column(db.String(10), nullable=False)  # 'buena' o 'quebrada'
     botones = db.Column(db.String(3), nullable=False)  # asumiendo que 'si' o 'no'
     simcard = db.Column(db.String(3), nullable=False)  # asumiendo que 'si' o 'no'

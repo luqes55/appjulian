@@ -9,28 +9,70 @@
   
 </head>
 <body>
+    
+    
+    <!--
     <nav class="sidebar">
-        
-            
             <div class="profi">
-                <!--
-                
-                -->
                 <h1 class="page-title">{{page_title }}</h1>
-                
-            </div>
-            <!--
-            <a href="{{ url_for('main.dashboard') }}">
-                <img src="{{ url_for('static', filename='images/logoPanel.png') }}" alt="Descripción de la imagen">
-            
-            </a>
-        -->
-        
-       
-          
+            </div>  
     </nav>
+-->
+<header>
+    
+
+       <img href="hola" alt="soy la imagen">
+
+       <button class="regre">
+        <a class="bot" href="{{ url_for('main.inicio') }}">Back</a>
+        </button>
+
+       <img src="#" alt="img" class="Perfil-img" id="profileImg">
+
+</header>
+<nav>
+
+    <div class="contenedor_nav">
+        
+        <button class="registro_nuevo"><a href="{{ url_for('main.register_cliente_dispositivo') }}">Registrar<a/> </button>
+
+
+
+        <form class="busqueda" method="GET" action="{{ url_for('main.buscar') }}">
+        
+            <input type="text" name="query" placeholder="Buscar por nombre o NIT" required>
+            <button class="buscal" type="submit">Buscar</button>
+        </form>
+    </div> 
+
+</nav>
+<hr>
+<!--<ul>
+    <li><a href="{{ url_for('main.inicio') }}">Inicio</a></li>
+    <li><a href="{{ url_for('main.register_cliente_dispositivo') }}">Registrar Cliente</a></li>
+    <li><a href="{{ url_for('main.buscar') }}">Buscar</a></li>
+    <li><a id="openPinButton" href="#">Acceder a Registro</a></li>
+</ul>
+  <li class="per">
+        <img src="{{ url_for('static', filename='images/admin.png') }}" alt="Perfil" >
+       <span>{{ current_user.usuario }}</span>
+    </li>
+   <button> <a href="{{ url_for('main.logout') }}">cerrar sessión</a></button>
+-->
     <div class="container">
-        <!-- Barra Lateral de Navegación -->
+        {% block content %}
+           <!-- Mensajes Flash -->
+           {% with messages = get_flashed_messages(with_categories=true) %}
+           {% if messages %}
+               <div class="flashes">
+                   {% for category, message in messages %}
+                       <div class="flash {{ category }}">{{ message }}</div>
+                   {% endfor %}
+               </div>
+           {% endif %}
+       {% endwith %}
+        
+          <!-- modal para el pin de acceso -->
         
             <div id="pinModal" class="modal" style="display:none;">
                 <div class="modal-content">
@@ -44,6 +86,15 @@
                 </div>
             </div>
 
+            <div class="dropdown-menu" id="dropdownMenu">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div> 
+            {% endblock %}
+    </div>
         
         <!-- 
         <nav class="nav">
@@ -53,39 +104,14 @@
        
             
             
-            <!-- Mensajes Flash -->
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    <div class="flashes">
-                        {% for category, message in messages %}
-                            <div class="flash {{ category }}">{{ message }}</div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            {% endwith %}
+         
 
             <!-- Contenido Dinámico -->
-            {% block content %}{% endblock %}
-    </div>
-        <div class="admin">
-            <ul>
-                <li><a href="{{ url_for('main.inicio') }}">Inicio</a></li>
-                <li><a href="{{ url_for('main.register_cliente_dispositivo') }}">Registrar Cliente</a></li>
-                <li><a href="{{ url_for('main.buscar') }}">Buscar</a></li>
-                <li><a id="openPinButton" href="#">Acceder a Registro</a></li>
-            
-
-            <li class="per">
-                <img src="{{ url_for('static', filename='images/admin.png') }}" alt="Perfil" >
-               <span>{{ current_user.usuario }}</span>
-            </li>
-           <button> <a href="{{ url_for('main.logout') }}">cerrar sessión</a></button>
-
-        </ul>
-            
-        </div>
+           
     
-
+        
+    
+                
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>

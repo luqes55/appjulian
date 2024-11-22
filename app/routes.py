@@ -172,11 +172,12 @@ def register_cliente_dispositivo():
 @main.route('/inicio')
 @login_required
 def inicio():
+    fecha = date.today()
     hoy = date.today()
     clientes_hoy = Cliente.query.filter_by(fechaIngreso=hoy).all()
     dispositivos_hoy = Dispositivo.query.filter_by(idCliente=hoy).all()
     
-    response = make_response(render_template('inicio.html', clientes_hoy=clientes_hoy, dispositivos_hoy=dispositivos_hoy, page_title='inicio'))
+    response = make_response(render_template('inicio.html', clientes_hoy=clientes_hoy, dispositivos_hoy=dispositivos_hoy, fecha_hoy=fecha, page_title='inicio'))
     response.headers['Cache-Control'] = 'no-store'
     return response
 
@@ -197,15 +198,17 @@ def buscar():
     if not cliente_results:
         flash('no se encontro ninguna coincidencia, por favor intente nueva mente','warning' )
     
+    response = make_response(render_template('resultado_busqueda.html', page_title='buscar', 
+                           cliente_results=cliente_results))
+    response.headers['Cache-Control'] = 'no-store'
+    return response
     
-    
-
+"""
     # Si se encuentran clientes, buscar dispositivos relacionados con cada cliente
     if cliente_results:
         for dispositivos in cliente_results:
             dispositivos = Dispositivo.query.filter_by(idCliente=Dispositivo.idCliente).all()
             cliente_results=dispositivos  # Agregar los dispositivos encontrados a la lista
-
-    return render_template('resultado_busqueda.html', page_title='Buscar', 
-                           cliente_results=cliente_results)
+"""
+    
 

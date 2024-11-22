@@ -45,11 +45,30 @@
             <!-- Datos del Dispositivo -->
             <fieldset id="dispo">
                
-                
+            <div class="cont"> 
                 <div>
-                <label for="IMEI">IMEI del telefono:</label>
-                <input type="text" id="Imei" name="indice" required>
+                    <input type="text" id="Imei" name="Imei" placeholder="IMEI del dispositivo" required>
                 </div>
+                <div>
+                    
+                    <input type="text" id="modelo" name="modelo" placeholder="Modelo del telefono" required>
+                </div>
+                <div>
+                    
+                    <input type="text" id="clave_tel" name="clave_tel" placeholder="clave del telefono" required>
+                </div>
+                <div>
+                    
+                    <input type="text" id="abono" name="abono" placeholder="Abono" required>
+                </div>
+                <div>
+                   
+                    <input type="text" id="estado" name="estado" placeholder="Estado">
+    
+                </div>
+            </div>
+            <div class="conte">
+                <!-- desde aqui los selects-->
                 <div>
                 <label for="marca">Marca:</label>
                 <select id="maraca" name="marca" required>
@@ -63,10 +82,7 @@
                     <option value="Zt">zt</option>
                 </select>
                 </div>
-                <div>
-                <label for="modelo">Modelo:</label>
-                <input type="text" id="modelo" name="modelo" required>
-            </div>
+                
             
             <div>
                 <label for="per_recibe">Persona que recibe:</label>
@@ -78,23 +94,10 @@
                   
                 </select>
             </div>
-            <div>
-                <label for="clave_tel">Clave del teléfono:</label>
-                <input type="text" id="clave_tel" name="clave_tel" required>
-            </div>
-            <div>
-                <label for="abono">Abono:</label>
-                <input type="text" id="abono" name="abono" required>
-            </div>
-            <div>
-                <label for="detalles">Detalles del dispositivo:</label>
-                <textarea id="detalles" name="detalles" required></textarea>
-            </div>
-            <div>
-                <label for="estado">Estado:</label>
-                <input type="text" id="estado" name="estado">
-
-            </div>
+           
+           
+            
+           
             
             <div>
                 <label for="color">Color:</label>
@@ -113,10 +116,12 @@
                 </select>
             </div>
             <div>
-                <label for="display_quebrado">Display quebrado:</label>
+                <label for="display_quebrado">Display:</label>
                 <select id="display_quebrado" name="display_quebrado" required>
-                    <option value="si">Sí</option>
-                    <option value="no">No</option>
+                    <option value="">select</option>
+                    <option value="rallado">Rallado</option>
+                    <option value="quebrado">quebrado</option>
+                    <option value="bueno">Bueno</option>
                 </select>
             </div>
             <div>
@@ -135,7 +140,7 @@
                 </select>
             </div>
             <div>
-                <label for="bandeja_sim">¿Tiene bandeja de SIM card?</label>
+                <label for="bandeja_sim">¿bandeja de SIM?</label>
                 <select id="bandeja_sim" name="bandeja_sim" required>
                     <option value="si">Sí</option>
                     <option value="no">No</option>
@@ -155,9 +160,13 @@
                     <option value="no">No</option>
                 </select>
             </div>
-            
+        </div>
+                <div>
+                        <label for="detalles">Detalles del dispositivo:</label>
+                        <textarea id="detalles" name="detalles" required></textarea>
+                </div> 
            
-            </fieldset>
+    </fieldset>
             <div class="but">
             <button class="guarda" type="submit">Registrar Cliente y Dispositivo</button>
             <button class="cancelar" type="reset">Cancelar</button>

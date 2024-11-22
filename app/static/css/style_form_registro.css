@@ -3,13 +3,17 @@
 
 /* Elemento #clien */
 #clien {
-    width: auto;     
+    width: 90%;
+    position: relative;
+    left: 50px;     
     height: auto;           
     background-color: #f4f4f4;  
     padding: 20px;         
     box-sizing: border-box; 
     border-radius: 10px;
     position: relative;
+    
+    
         
 }
 
@@ -46,12 +50,12 @@
 
 /* Contenedor principal .clien */
 .clien {
-    display: flex;
-    flex-wrap: wrap; /* Permite que los elementos dentro de .clien se acomoden */
-    justify-content: space-between;
     height: auto;
     position: relative;
+    left: 50px;
     margin: 0;
+    width: 90%;
+    
 }
 
 /* Estilo para los campos dentro de .fiel (input, textarea, select) */
@@ -61,6 +65,7 @@
     justify-content: space-between;
     margin: 0;
     width: 100%;
+    border: none;
 }
 .fiel label{
     width: auto;
@@ -71,25 +76,39 @@
 
 /* Estilo para el contenedor #dispo */
 #dispo {
-    display: flex;
-    flex-wrap: wrap; 
-    gap: 20px;   /* Hace que los campos se ajusten a varias líneas */
-    justify-content: space-between;
     margin-top: 5px;
-    width: 98%;        /* Asegura que el contenedor #dispo ocupe el 100% del espacio */
+    width: 90%;        /* Asegura que el contenedor #dispo ocupe el 100% del espacio */
     border: none;
+    position: relative;
+    left: 50px;
+
 }
+
+.cont{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.conte{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+
 #dispo label{
     width: auto;
 }
 
 /* Estilos para los inputs y selects dentro de #dispo */
 #dispo input{
-    margin: 10px;
-    width: 58%;          /* Ajustamos el ancho a un porcentaje, para que se acomoden */
+    margin:10px;
+    width: auto;          /* Ajustamos el ancho a un porcentaje, para que se acomoden */
     height: 35px;
     border: solid 1px black;
-    border-radius: 4px;  /* Redondeamos los bordes para un diseño más suave */
+    border-radius: 15px;  /* Redondeamos los bordes para un diseño más suave */
     box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
 }
  #dispo div select{
@@ -97,7 +116,7 @@
     width: auto;          /* Ajustamos el ancho a un porcentaje, para que se acomoden */
     height: 35px;
     border: solid 1px black;
-    border-radius: 4px;  /* Redondeamos los bordes para un diseño más suave */
+    border-radius: 20px;  /* Redondeamos los bordes para un diseño más suave */
     box-sizing: border-box;
 }
 
@@ -192,18 +211,7 @@ button.guarda:hover{
 button.cancelar:hover{
     background-color: green;
 }
-.verifi{
-   
-}
 
-.clien1{
-   
-}
-
-
-.clien1 #dispo textarea{
-    
-}
 legend{
     font-size: 30px;
 }

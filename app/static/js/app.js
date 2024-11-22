@@ -39,3 +39,16 @@ function cancelarRegistro() {
             document.getElementById('password').value = '';
         }
     };
+
+
+
+    //aqui el js para el dropdown de el perfil
+
+    document.getElementById('profileImg').addEventListener('click', ()=>{
+        const dropdownMenu=document.getElementById('dropdownMenu');
+        if (dropdownMenu.style.left=== 'opx'){
+            dropdownMenu.style.left= '-250px';
+            }else{
+                dropdownMenu.style.left='0px';
+            }
+    })

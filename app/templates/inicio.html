@@ -1,10 +1,13 @@
 {% extends 'dashboard.html' %}
 
 {% block content %}
-  
+  <!--
     <h1 class="presentacion">Registros de hoy (agregar-date)</h2>
     
     <h3 >Clientes Registrados Hoy</h3>
+    -->
+    <div id="page_inicio">
+        <h3 class="regis_encontrados"> Registros de hoy {{fecha_hoy}} : {{ clientes_hoy|length }}  </h3>
     {% if clientes_hoy %}
         <table>
             <thead>
@@ -36,6 +39,7 @@
                 {% endfor %}
             </tbody>
         </table>
+    </div> 
     {% else %}
         <p>No hay clientes registrados hoy.</p>
     {% endif %}
