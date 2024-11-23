@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request,make_response
+from flask import Blueprint, render_template, redirect, url_for, flash, request,make_response,jsonify
 from flask_login import login_required, login_user, logout_user, current_user
 from .models import User, Cliente, Dispositivo
 from .database import db
@@ -101,7 +101,7 @@ def login():
         if user and user.check_password(password):
             login_user(user)
             flash('Inicio de sesión exitoso.', 'success')
-            response = make_response(redirect(url_for('main.dashboard')))
+            response = make_response(redirect(url_for('main.inicio')))
             return response
         else:
             flash('Credenciales inválidas.', 'danger')
@@ -153,13 +153,13 @@ def register_cliente_dispositivo():
         
     
         # Guardar cliente y dispositivo en la base de datos
-        nuevo_cliente = Cliente(nombre=nombre, apellidos=apellidos, nit=nit, correo=correo, direccion=direccion, telefono=telefono, fechaIngreso=fechaIngreso, )
+        nuevo_cliente = Cliente(nombre=nombre, apellidos=apellidos, nit=nit, correo=correo, direccion=direccion, telefono=telefono, fechaIngreso=fechaIngreso, estado=estado )
         db.session.add(nuevo_cliente)
         db.session.commit()
 
         dispositivo = Dispositivo(idCliente=nuevo_cliente.idCliente, marca=marca, modelo=modelo, detalles=detalles,
                                   Imei=IMEI, per_recibe=per_recibe, clave_tel=clave_tel, abono=abono,color=color, enciende=enciende, 
-                                  display_quebrado=display_quebrado, tapa_quebrada=tapa_quebrada, botones=botones, bandeja_sim=bandeja_sim, estuche=estuche, simcard=simcard, estado=estado)
+                                  display_quebrado=display_quebrado, tapa_quebrada=tapa_quebrada, botones=botones, bandeja_sim=bandeja_sim, estuche=estuche, simcard=simcard)
         db.session.add(dispositivo)
         db.session.commit()
 
@@ -181,6 +181,22 @@ def inicio():
     response.headers['Cache-Control'] = 'no-store'
     return response
 
+
+
+#ruta para cambiar el estado de los registros en inicio.html
+
+@main.route('/actualizar_registro', methods=['POST'])
+def actualizar_registro():
+    id= request.form['id']
+    nuevo_estado= request.form['nuevoEstado']
+    
+    print ("id recibido: ", id)
+    
+    registro = Cliente.query.get(id)
+    registro.estado=nuevo_estado
+    db.session.commit()
+    
+    return jsonify({"mesage": "no se encontro noi  mejbfhdvc"}), 200
 
 # Ruta para realizar la búsqueda de clientes registrados y sus dispositivos
 @main.route('/buscar', methods=['GET','POST'])

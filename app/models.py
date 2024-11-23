@@ -15,6 +15,7 @@ class Cliente(db.Model):
     direccion = db.Column(db.String(65), nullable=False)
     telefono = db.Column(db.Integer, nullable=False)
     fechaIngreso = db.Column(db.Date, nullable=False)
+    estado=db.Column(db.String(20), nullable=False)
 
 
 # Modelo de Dispositivo
@@ -37,7 +38,7 @@ class Dispositivo(db.Model):
     simcard = db.Column(db.String(3), nullable=False)  # asumiendo que 'si' o 'no'
     estuche = db.Column(db.String(3), nullable=False)  # asumiendo que 'si' o 'no'
     bandeja_sim = db.Column(db.String(3), nullable=False)  # asumiendo que 'si' o 'no'
-    estado=db.Column(db.String(10), nullable=False)
+   
     
 # Modelo de usuario para la autenticación
 class User(UserMixin, db.Model):

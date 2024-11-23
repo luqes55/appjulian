@@ -5,13 +5,12 @@
 #clien {
     width: 90%;
     position: relative;
-    left: 50px;     
+    left: 70px;     
     height: auto;           
-    background-color: #f4f4f4;  
+    background-color: #ffffff;  
     padding: 20px;         
     box-sizing: border-box; 
-    border-radius: 10px;
-    position: relative;
+    border-radius: 20px;
     
     
         
@@ -56,6 +55,7 @@
     margin: 0;
     width: 90%;
     
+    
 }
 
 /* Estilo para los campos dentro de .fiel (input, textarea, select) */
@@ -73,6 +73,31 @@
 .fiel div{
     width: auto;
 }
+.fiel input{
+    border: 2px solid #a4b1ba;
+    margin-top: 10px;
+}
+.but{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    left: 500px;
+}
+.but .guarda {
+    font-size: 15px;
+    width: 90px;
+    background-color: #1270b0;
+    margin: 0%;
+    border-radius: 20px;
+}
+.but .cancelar{
+    font-size: 15px;
+    width: 90px;
+    margin: 0%;
+    background-color: #1270b0;
+    border-radius: 20px;
+}
 
 /* Estilo para el contenedor #dispo */
 #dispo {
@@ -81,73 +106,69 @@
     border: none;
     position: relative;
     left: 50px;
-
-}
-
-.cont{
-    width: 100%;
     display: flex;
     justify-content: space-between;
+    
+        
 }
+
+
 .conte{
-    width: 100%;
+    width:100%;
+    padding: 0px;
+    height: auto;
     display: flex;
     justify-content: space-between;
+   
+      
+}
+.datos_cliente{
+    padding: 22px;
+    
+}
+.datos_cliente div{
+    margin-bottom:13px;
+}
+.datos_cliente input{
+    border: 2px solid #a4b1ba;
 }
 
 
 
 
 #dispo label{
-    width: auto;
+    width: 250px;
 }
 
 /* Estilos para los inputs y selects dentro de #dispo */
 #dispo input{
     margin:10px;
-    width: auto;          /* Ajustamos el ancho a un porcentaje, para que se acomoden */
+    width: 270px;          /* Ajustamos el ancho a un porcentaje, para que se acomoden */
     height: 35px;
-    border: solid 1px black;
     border-radius: 15px;  /* Redondeamos los bordes para un diseño más suave */
     box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
 }
- #dispo div select{
-    
-    width: auto;          /* Ajustamos el ancho a un porcentaje, para que se acomoden */
+ #dispo select{
+    border: 2px solid #a4b1ba;
+    width: 200px;          /* Ajustamos el ancho a un porcentaje, para que se acomoden */
     height: 35px;
-    border: solid 1px black;
     border-radius: 20px;  /* Redondeamos los bordes para un diseño más suave */
     box-sizing: border-box;
+    text-align: center;
+    
 }
 
 /* Estilo para el textarea dentro de #dispo */
-#dispo textarea {
-    width: 500px;          /* El textarea ocupará todo el ancho disponible */
-    height: 150px;
-    border: solid 1px black;
-    margin: 10px 0;       /* Agrega espacio arriba y abajo del textarea */
+textarea {
+    border: 2px solid #a4b1ba;
+    width: 90%;          /* El textarea ocupará todo el ancho disponible */
+    height: 80px;     /* Agrega espacio arriba y abajo del textarea */
     border-radius: 4px;
     box-sizing: border-box;
+    position:relative;
+    right: 13px;
 }
 
-/* Estilo para el botón */
-.but {
-    margin-top: 10px;
-    text-align: center; 
-    width: 550px;  /* Centra el botón en pantallas pequeñas */
-    margin: 0 auto;
-}
-
-button.guarda {
-    margin: -120px;
-    background-color: rgb(20, 77, 236);
-    font-size: 17px;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
 
 /* Media Query para pantallas más pequeñas (máximo 768px) */
 @media (max-width: 768px) {
@@ -167,6 +188,7 @@ button.guarda {
     #dispo input,
     #dispo select,
     #dispo textarea {
+        border: 2px solid #a4b1ba;
         width: 100%;            /* Asegura que los inputs y textarea ocupen el 100% del ancho */
         margin: 10px 0;         /* Añade márgenes verticales */
     }
@@ -199,17 +221,14 @@ button.guarda {
 }
 
 
-button.cancelar{
-    background-color: red;
-    font-size: 17px;
-}
+
 
 button.guarda:hover{
-    background-color: green;
+    background-color: #45c645;
 }
 
 button.cancelar:hover{
-    background-color: green;
+    background-color: #47cd47;
 }
 
 legend{

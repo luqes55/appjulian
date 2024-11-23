@@ -1,8 +1,5 @@
 
-*{
-    padding: 0%;
-    margin: 0%;
-}
+
 
 body{
         margin: 0%;
@@ -28,12 +25,12 @@ header{
     height: 40px;
     border-radius:50px;
     cursor: pointer;
-    border: 2 solid #fff;
+    border: 2 solid #ffffff;
 }
 
     .container {
         width:100%;
-        height: 75vh;
+        height: auto;
         margin: 0;
         position:relative;
         
@@ -91,14 +88,15 @@ header{
         height: auto;
         padding: 0px;
         background-color: #fff;
-        border-radius: 25px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        border-radius: 25px; border: 2px solid #a4b1ba;
+        
     
         
         
         
     }
     form.busqueda input{
+       
         font-size: 18px;
         width: 100% !important;
         border-radius: 25px;
@@ -106,8 +104,9 @@ header{
         
         
     }
-    form.busqueda input:active{
-        border: none;
+    form.busqueda input:focus{
+        border: 2px solid #a4b1ba;
+        outline: none;
     }
     
     .buscal{
@@ -121,6 +120,7 @@ header{
         border-radius: 25px;
         cursor: pointer;
         margin: 0%;
+
         font-size: 20px;
         text-align: center;
         position:absolute;
@@ -129,7 +129,7 @@ header{
         
     }
     .buscal:hover{
-        background-color:#5cb85c ;
+        background-color:#4fbe4f ;
     }
  #page_inicio{
     
@@ -592,4 +592,24 @@ form button:hover {
     margin-bottom: 10px;
 }
 
+
+.estado{
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    margin: 0%;
+    position: relative;
+    left: auto;
+    top: auto;
+}
+
+.estado.pendiente{
+    background-color: orange;
+
+}
+.estado.entregado{
+    background-color: green;
+}
 
