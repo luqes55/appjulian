@@ -1,3 +1,4 @@
+from sqlalchemy import Enum
 from .database import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -15,7 +16,7 @@ class Cliente(db.Model):
     direccion = db.Column(db.String(65), nullable=False)
     telefono = db.Column(db.Integer, nullable=False)
     fechaIngreso = db.Column(db.Date, nullable=False)
-    estado=db.Column(db.String(20), nullable=False)
+    estado=db.Column(Enum('pendiente','entregado', name='estado_enum'), nullable=False)
 
 
 # Modelo de Dispositivo

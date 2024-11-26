@@ -17,15 +17,17 @@ header{
     width: 100%;
     height: 67px;
     display: flex;
-    justify-content: space-between;
+    
 }
 
-.profile-img{
+header .Profil-img{
     width: 40px;
     height: 40px;
     border-radius:50px;
     cursor: pointer;
     border: 2 solid #ffffff;
+    position: absolute;
+    right: 34px;
 }
 
     .container {
@@ -590,6 +592,34 @@ form button:hover {
     width: 90%;
     padding: 10px;
     margin-bottom: 10px;
+}
+
+
+
+
+
+#modal{
+    display: none;
+    position: fixed;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+#modal-overlay{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:rgba(0, 0, 0, 0.5) ;
+    z-index: 999;
 }
 
 

@@ -18,18 +18,16 @@
             </div>  
     </nav>
 -->
+
 <header>
     
-
+    {% block header%}
        <img href="hola" alt="soy la imagen">
 
-       <button class="regre">
-        <a class="bot" href="{{ url_for('main.inicio') }}">Back</a>
-        </button>
-
-       <img src="#" alt="img" class="Perfil-img" id="profileImg">
-
+       <img src="#" alt="img" class="Profil-img" id="profileImg">
+    {% endblock%}
 </header>
+
 <nav>
 
     <div class="contenedor_nav">
@@ -86,13 +84,9 @@
                 </div>
             </div>
 
-            <div class="dropdown-menu" id="dropdownMenu">
-                <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </div> 
+           
+            
+
             {% endblock %}
     </div>
         

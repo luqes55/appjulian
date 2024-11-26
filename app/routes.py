@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request,make_response,jsonify
 from flask_login import login_required, login_user, logout_user, current_user
-from .models import User, Cliente, Dispositivo
+from .models import User,db, Cliente, Dispositivo
 from .database import db
 from datetime import date
 
@@ -185,18 +185,35 @@ def inicio():
 
 #ruta para cambiar el estado de los registros en inicio.html
 
-@main.route('/actualizar_registro', methods=['POST'])
+@main.route('/actualizar_estado', methods=['POST'])
 def actualizar_registro():
-    id= request.form['id']
-    nuevo_estado= request.form['nuevoEstado']
     
-    print ("id recibido: ", id)
+    try:
+        estado_id= int(request.form.get('estado_id',0))
+    except ValueError:
+        return jsonify({"error":"Id invalido"}), 400
     
-    registro = Cliente.query.get(id)
-    registro.estado=nuevo_estado
+    nuevo_estado= request.form.get('estado')
+    if not estado_id or not nuevo_estado:
+        return jsonify({"error":"malo"})
+    
+    if nuevo_estado not in ["pendiente", "entregado"]:
+        return jsonify({"error":"estado invalido"}),400
+    
+    estado = Cliente.query.get(estado_id)
+    if not estado:
+        return jsonify({"error": "estado no encontrado"})
+    
+    estado.estado= nuevo_estado
     db.session.commit()
     
-    return jsonify({"mesage": "no se encontro noi  mejbfhdvc"}), 200
+    return jsonify({"mensaje":" estado actualizado con exito",
+                    "id":estado_id,
+                    "nuevo_estado":estado.estado})
+   
+    
+    
+   
 
 # Ruta para realizar la búsqueda de clientes registrados y sus dispositivos
 @main.route('/buscar', methods=['GET','POST'])
