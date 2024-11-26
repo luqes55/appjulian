@@ -56,8 +56,8 @@ function cancelarRegistro() {
 
     /************ js para el formulario de final de el estado del registro *******/
     /** mostramos el modal y pasamos el id al input oculto */
-    function abrirformulario(id){
-        document.getElementById('formularioModal').style.display='block';
+    function actualizarRegistros(){
+        document.getElementById('formularioModal').style.display='block'; 
         
     }
 
