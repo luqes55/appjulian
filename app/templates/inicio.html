@@ -6,7 +6,25 @@
   
     <div id="page_inicio">
 
-       
+
+        <div id="formularioModal" style="display:none;" onclick="actualizar_registro">
+            <div class="modal-content">
+                <h3>registre los datos finales</h3>
+                <form id="estadoform" method="POST" action="/actualizar_registro">
+                    <input type="hidden" name="id" id="idInput">
+                    <label for="nuevoEstado">estado</label>
+                    <select name="nuevoEstado" id="nuevoEstado">
+                        <option value="pendiente">Pendiente</option>
+                        <option value="entregado">entregado</option>
+                    </select>
+    
+                    <button type="submit">guardar</button>
+                    <button type="button" onclick="cerrarformulario()">Cancelar</button>
+                </form>
+            </div>
+        </div>
+
+
         <h3 class="regis_encontrados"> Registros de hoy {{fecha_hoy}} : {{ clientes_hoy|length }}  </h3>
 
     {% if clientes_hoy %}

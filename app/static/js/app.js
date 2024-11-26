@@ -54,46 +54,13 @@ function cancelarRegistro() {
     })
 
 
-    /*******************************js para el formulario de final de el estado del registro **************************/
-    
-    function abrirform(clienteId, estadoActual){
-        document.getElementById('estado_id').value= clienteId;
-        document.getElementById('estado').value= estadoActual;
-
-        document.getElementById('modal').style.display='block';
-        ducument.getElementById('modal-overlay').style.display='block';
+    /************ js para el formulario de final de el estado del registro *******/
+    /** mostramos el modal y pasamos el id al input oculto */
+    function abrirformulario(id){
+        document.getElementById('formularioModal').style.display='block';
         
     }
 
     function cerrarformulario(){
-        ducument.getElementById('modal').style.display='none';
-        document.getElementById('modal-overlay').style.display='none';
+        ducument.getElementById('formularioModal').style.display='none';
     }
-
-    document.getElementById('form-estado').addEventListener('submit', async(event) =>{
-        event.preventDefault();
-
-
-        const formdata= new FormData(event.target);
-        const respuesta= await fetch(event.target.action,{
-            method: 'POST',
-            body: formdata
-        });
-
-        if (respuesta.ok){
-            const datos= await respuesta.json();
-            alert('estado actualizado exitosamente');
-
-            const estado = FormData.get('estado_id');
-            const nuevoEstado = formdata.get('estado');
-            const estadoSpan = document.querySelector(`span[onclick="abrirform(${estadoId},'${nuevoEstado}')"]`);
-            if(estadoSpan){
-                estadoSpan.textContent= nuevoEstado;
-                estadoSpan.className= `estado ${nuevoEstado}`;
-            }
-
-            cerrarformulario();
-        }else{
-            alert('error al actualizar el estado')
-        }
-    });
