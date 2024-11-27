@@ -2,35 +2,39 @@
 
 {% extends 'dashboard.html' %}
 {% block title %}APP JULIAN | REGISTER-USER {% endblock %}
-{% block header%}
-    <img src="{{ url_for('static', filename='images/logo2.svg') }}" class="logo-img" alt="soy la imagen">
 
-            <button class="regre">
-                <a class="bot" href="{{ url_for('main.inicio') }}">Back</a>
-            </button>
-
-    
-            <a href="{{ url_for('main.inicio') }}"><img src="{{ url_for('static', filename='images/perfil.png') }}"  alt="img" class="Perfil-img" id="profileImg"></a>
-
-    {% endblock%}
 {% block content %}
-    
-    <form class="form-regis" method="POST" action="{{ url_for('main.register_user') }}">
-        <h1 >registro de nuevo usuario</h1>
+
+    <div id="page_inicio">
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+    <div class="flashes">
+        {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endwith %}
+
+
+    <form  class="form-regis" method="POST" action="{{ url_for('main.register_user') }}">
+        <h3 >registro de nuevo usuario</h3>
         <label for="usuario">Usuario:</label>
         <input type="text" name="usuario" required><br>
     
         <label for="password">Contraseña:</label>
         <input type="password" name="password" required><br>
         
-        <label for="pin" >crea un pin</label>
+        <h2>crea un pin</h2>
         <input type="password" name="pin" placeholder="1234.." required>
-        <button type="close">cancelar</button>
+        <button type="button" id="canUser">cancelar</button>
         <button type="submit">Registrar</button>
         
     </form>
+
+</div>
     {% endblock %}
-    <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+   
 
 
 

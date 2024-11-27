@@ -149,8 +149,9 @@
     box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
 }
  #dispo select{
+    margin: 10px;
     border: 2px solid #a4b1ba;
-    width: 200px;          /* Ajustamos el ancho a un porcentaje, para que se acomoden */
+    width: 270px;          /* Ajustamos el ancho a un porcentaje, para que se acomoden */
     height: 35px;
     border-radius: 20px;  /* Redondeamos los bordes para un diseño más suave */
     box-sizing: border-box;

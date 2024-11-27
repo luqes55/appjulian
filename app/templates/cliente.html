@@ -3,17 +3,7 @@
     {% extends 'dashboard.html' %}
     {% block title %}APP JULIAN | Nuevo Registro{% endblock %}
     
-    {% block header%}
-    <img src="{{ url_for('static', filename='images/logo2.svg') }}" class="logo-img" alt="soy la imagen">
-
-            <button class="regre">
-                <a class="bot" href="{{ url_for('main.inicio') }}">Back</a>
-            </button>
-
-    
-            <a href="{{ url_for('main.inicio') }}"><img src="{{ url_for('static', filename='images/perfil.png') }}"  alt="img" class="Perfil-img" id="profileImg"></a>
-
-    {% endblock%}
+   
 
     {% block content %}
     
@@ -25,27 +15,27 @@
                 
             <div>
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
+                <input type="text" id="nombre" name="nombre"  placeholder="Nombres" required>
             </div>
             <div>
                 <label for="apellidos">Apellidos:</label>
-                <input type="text" id="apellidos" name="apellidos" required>
+                <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" required>
             </div>
             <div>
                 <label for="nit">NIT:</label>
-                <input type="text" id="nit" name="nit" required>
+                <input type="text" id="nit" name="nit" placeholder="Cc. Cliente" required>
             </div>
             <div>
                 <label for="correo">Correo:</label>
-                <input type="email" id="correo" name="correo" required>
+                <input type="email" id="correo" name="correo" placeholder="Correo electronico"required>
             </div>
             <div>
                 <label for="direccion">Dirección:</label>
-                <input type="text" id="direccion" name="direccion" required>
+                <input type="text" id="direccion" name="direccion" placeholder="Direccion de residencia"required>
             </div>
             <div>
                 <label for="telefono">Teléfono:</label>
-                <input type="text" id="telefono" name="telefono" required>
+                <input type="text" id="telefono" name="telefono" placeholder="Tel/celular" required>
             </div>
             <div>
                 <label for="fechaIngreso">Fecha registro:</label>
@@ -79,18 +69,18 @@
                                 <input type="text" id="abono" name="abono" placeholder="Abono" required>
                             </div>
                             <div>
-                            
+                                
                                 <input type="text" id="estado" name="estado" value="pendiente" selected>
                 
                             </div>
 
                     </div>
                 <!-- segundo div-->
-                    <div>
+                    <div class="datos_cliente">
                             <div>
-                            <label for="marca">Marca:</label>
+                            
                             <select id="maraca" name="marca" required>
-                                    <option value="">Seleccionar...</option>
+                                    <option value="">Marca telefono</option>
                                     <option value="Iphone">Iphone</option>
                                     <option value="Samgung">Samsung</option>
                                     <option value="Motorola">Motorola</option>
@@ -103,9 +93,9 @@
                                 
                             
                             <div>
-                                <label for="per_recibe">Persona que recibe:</label>
+                               
                                 <select id="per_recibe" name="per_recibe" required>
-                                    <option value="">Seleccionar...</option>
+                                    <option value="">Persona que recibe</option>
                                     <option value="Julian">Julian</option>
                                     <option value="Camila">Camila</option>
                                     <option value="Manuel">Manuel</option>
@@ -113,9 +103,9 @@
                                 </select>
                             </div>
                             <div>
-                                <label for="color">Color telefono:</label>
+                                
                                 <select id="color" name="color" required>
-                                    <option value="">Seleccionar...</option>
+                                    <option value="">Color telefono</option>
                                     <option value="amarillo">Amarillo</option>
                                     <option value="verde">Verde</option>
                                     <option value="azul">Azul</option>
@@ -124,8 +114,9 @@
                             </div>
                         
                             <div>
-                                <label for="display_quebrado">Display:</label>
+                               
                                 <select id="display_quebrado" name="display_quebrado" required>
+                                    <option value="">Estado Display</option>
                                     <option value="bueno">Bueno</option>
                                     <option value="rallado">Rayado</option>
                                     <option value="quebrado">Quebrado</option>
@@ -135,8 +126,9 @@
                             
                             <div>
 
-                                <label for="tapa_quebrada">Estado de la tapa:</label>
+                                
                                 <select id="tapa" name="tapa_quebrada" required>
+                                    <option value="">Estado tapa Telefono</option>
                                     <option value="buena"> Buena</option>
                                     <option value="buena"> Rayada</option>
                                     <option value="quebrada"> Quebrada</option>
@@ -145,38 +137,43 @@
                     </div>
 
                      <!-- tercer div-->
-                    <div>
+                    <div class="datos_cliente">
                             <div>
-                                <label for="enciende">Enciende:</label>
+                                
                                 <select id="enciende" name="enciende" required>
+                                    <option value="">Telefono Enciende</option>
                                     <option value="si"> Sí</option>
                                     <option value="no"> No</option>
                                 </select>
                             </div>
                             <div>
-                                <label for="botones">¿Trae botones?</label>
+                                
                                 <select id="botones" name="botones" required>
+                                    <option value="">Tiene todos los botones</option>
                                     <option value="si">Sí</option>
                                     <option value="no">No</option>
                                 </select>
                             </div>
                             <div>
-                                <label for="bandeja_sim">¿bandeja de SIM?</label>
+                               
                                 <select id="bandeja_sim" name="bandeja_sim" required>
+                                    <option value=""> Tiene la bandeja Simcard</option>
                                     <option value="si">Sí</option>
                                     <option value="no">No</option>
                                 </select>
                             </div>
                             <div>
-                                <label for="estuche">¿Trae estuche?</label>
+                                
                                 <select id="estuche" name="estuche" required>
+                                    <option value="">Trae estuche</option>
                                     <option value="si">Sí</option>
                                     <option value="no">No</option>
                                 </select>
                             </div>
                             <div>
-                                <label for="simcard">¿Trae SIM card?</label>
+                                
                                 <select id="simcard" name="simcard" required>
+                                    <option value="">Trae Simcard</option>
                                     <option value="si">Sí</option>
                                     <option value="no">No</option>
                                 </select>
@@ -190,7 +187,7 @@
             </div>
             <div class="but">
                 <button class="guarda" type="submit">Guadar</button>
-                <button class="cancelar" type="reset">Limpia</button>
+                <button class="cancelar" type="reset" >Limpia</button>
             </div>
         </div>
        

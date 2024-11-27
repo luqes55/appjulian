@@ -43,11 +43,11 @@ class Dispositivo(db.Model):
     
 # Modelo de usuario para la autenticación
 class User(UserMixin, db.Model):
-    __tablename__ = 'user'  # Nombre de la tabla en MySQL
+    __tablename__ = 'user'  
     id = db.Column(db.Integer, primary_key=True)
     usuario = db.Column(db.String(45), unique=True, nullable=False)
-    password = db.Column(db.String(255), nullable=False)  # Cambié el tamaño del campo
-    pin = db.Column(db.BigInteger, nullable=False)  # Campo para el PIN
+    password = db.Column(db.String(255), nullable=False)  
+    pin = db.Column(db.String(20), nullable=False)  
 
      # Hashea la contraseña
     def set_password(self, password):

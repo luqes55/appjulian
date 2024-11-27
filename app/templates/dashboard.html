@@ -9,8 +9,10 @@
   
 </head>
 <body>
-    
-    
+    <div id="loader" style="color:red;">
+        <div class="spiner">cargando</div>
+    </div>
+   
     <!--
     <nav class="sidebar">
             <div class="profi">
@@ -26,13 +28,33 @@
        <img src="{{ url_for('static', filename='images/logo2.svg') }}" class="logo-img" alt="soy la imagen">
            
             
-       <div >
-        <img src="{{ url_for('static', filename='images/perfil.png') }}" class="profile" alt="img" id="profileImg">
-        <div class="span"><span>{{ current_user.usuario }}</span></div>
+       <div  class="dropdown">
+        <img src="{{ url_for('static', filename='images/iconadmin1.png') }}" class="profile" >
+        <div class="span"><span> Admin {{ current_user.usuario }}</span>
+                <div class="dropdown-menu" >
+                   
+                    <a href="{{url_for('main.buscar')}}">Editar perfil</a>
+                    <a href="#" id="openModalLink">Crear nuevo usuario</a>
+                    <a href="{{url_for('main.logout')}}">Cerrar sessión</a>
+                </div>
+
        </div>
-    
-       
-       
+
+
+        <!-- modal para el pin de acceso -->
+        
+        <div id="pinModal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <h3>Ingresa su PIN de acceso</h3>
+                <form class="can" action="{{ url_for('main.validate_pin') }}" method="POST">
+                    <input type="password" name="pin" placeholder="PIN" required>
+                    <button class="cancel" type="button" id="closeModal">Cancelar</button>
+                    <button class="validar" type="submit">Validar</button>
+                    <p style="color:red; display:none;" id="errorMessage">PIN incorrecto</p>
+                </form>
+            </div>
+        </div>
+          
     {% endblock%}
 </header>
 
@@ -41,14 +63,16 @@
     <div class="contenedor_nav">
         
         <button class="registro_nuevo"><a href="{{ url_for('main.register_cliente_dispositivo') }}">Registrar<a/> </button>
-
-
-
-        <form class="busqueda" method="GET" action="{{ url_for('main.buscar') }}">
-        
-            <input type="text" name="query" placeholder="Buscar por nombre o NIT" required>
-            <button class="buscal" type="submit">Buscar</button>
-        </form>
+            <button class="regre">
+                <a class="bot" href="{{ url_for('main.dashboard') }}">Dashboard</a>
+            </button>  
+            <button class="regre">
+                <a class="bot" href="{{ url_for('main.inicio') }}">INICIO</a>
+            </button>
+            <form class="busqueda" method="GET" action="{{ url_for('main.buscar') }}">
+                <input type="text" name="query" placeholder="Buscar por nombre o NIT" required>
+                <button class="buscal" type="submit">Buscar</button>
+            </form>
     </div> 
 
 </nav>
@@ -56,7 +80,12 @@
 
    
     <div class="container">
+
+       
+        
         {% block content %}
+
+        
            <!-- Mensajes Flash -->
            {% with messages = get_flashed_messages(with_categories=true) %}
            {% if messages %}
@@ -68,38 +97,10 @@
            {% endif %}
        {% endwith %}
         
-          <!-- modal para el pin de acceso -->
-        
-            <div id="pinModal" class="modal" style="display:none;">
-                <div class="modal-content">
-                    <h2>Ingresa su PIN de acceso</h2>
-                    <form class="can" action="{{ url_for('main.validate_pin') }}" method="POST">
-                        <input type="password" name="pin" placeholder="PIN" required>
-                        <button class="cancel" type="button" id="closeModal">Cancelar</button>
-                        <button class="validar" type="submit">Validar</button>
-                        <p style="color:red; display:none;" id="errorMessage">PIN incorrecto</p>
-                    </form>
-                </div>
-            </div>
+         
 
             {% endblock %}
     </div>
-        
-        <!-- 
-        <nav class="nav">
-            <h1 class="page-title">{{ page_title }}</h1>
-        </nav>
-       Área de Contenido Principal -->
-       
-            
-            
-         
-
-            <!-- Contenido Dinámico -->
-           
-    
-        
-    
                 
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>

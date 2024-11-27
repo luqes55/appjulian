@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request,make_response,jsonify
+from flask import Blueprint, render_template, redirect, url_for, flash, request,make_response
 from flask_login import login_required, login_user, logout_user, current_user
 from .models import User, Cliente, Dispositivo
 from .database import db
@@ -29,36 +29,29 @@ def register_user():
         # Crear un nuevo usuario
         nuevo_usuario = User(usuario=usuario)
         nuevo_usuario.set_password(password)  # Hashear la contraseña
-        nuevo_usuario.set_pin(pin)  # Guardar el PIN
+        nuevo_usuario.set_pin(pin) 
         db.session.add(nuevo_usuario)
         db.session.commit()
 
         flash('Usuario registrado exitosamente.', 'success')
-        return make_response(redirect(url_for('main.register_user')), 200) 
-        
-         # Respuesta con código 200
-
+        return redirect(url_for('main.register_user')) 
+    
     return make_response(render_template('register.html', page_title='Registrar usuario'), 200)
 
 @main.route('/validate_pin', methods=['POST'])
 @login_required
 def validate_pin():
     pin = request.form['pin']
+    print("pin:", pin)
 
-    # Lógica para validar el PIN almacenado en la base de datos
-    if current_user.check_pin(pin):  # Utiliza el método check_pin que definiste en tu modelo User
-        # El PIN es correcto, redirigir a la ruta de registro
+   
+    if current_user.check_pin(pin): 
+       
         return redirect(url_for('main.register_user'))
     else:
-        # El PIN es incorrecto, redirigir a la página de inicio (dashboard) con un mensaje de error
+       
         flash('PIN incorrecto', 'danger')
         return redirect(url_for('main.dashboard'))
-
-
-
-
-
-
 
 
 @main.route('/')
@@ -92,7 +85,8 @@ def dashboard():
 @main.route('/login', methods=['GET', 'POST'])
 def login():
     
-    
+    if current_user.is_authenticated:
+        return redirect(url_for('main.dashboard'))
     
     if request.method == 'POST':
         usuario = request.form['usuario']

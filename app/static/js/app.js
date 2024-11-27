@@ -1,36 +1,24 @@
-function cancelarRegistro() {
-    if (confirm("¿Estás seguro de que deseas cancelar el registro? Todos los datos se perderán.")) {
-        // Limpiar los campos del formulario
-        document.querySelector('form').reset();
-        // Redirigir a la página principal
-        window.location.href = "/inicio";
-    }
-}
 
-
-    // Función para abrir el modal
+//modal de pin de acceso a registro de nuevos usuarios
     function openPinModal() {
         document.getElementById('pinModal').style.display = 'block';
     }
+
+    document.getElementById('openModalLink').addEventListener('click', openPinModal);
 
     // Función para cerrar el modal
     function closePinModal() {
         document.getElementById('pinModal').style.display = 'none';
     }
 
-    // Agregar un evento para el botón de cancelar
-    document.getElementById('closeModal').onclick = function() {
+    document.getElementById('closeModal').onclick = function(){
         closePinModal();
+        
     }
 
-    // abrir el modal cuando se hace clic en un botón
-    document.getElementById('openPinButton').onclick = function() {
-        openPinModal();
-    }
-
-     // Limpiar los campos del formulario  si hay un mensaje de éxito de session iniciada}
+     /**limpiar los datos del form login */
      window.onload = function() {
-        // Obtenemos los mensajes flash del backend
+        
         const messages = JSON.parse(document.getElementById('messages-data').textContent);
         const successMessage = messages.some(msg => msg[0] === 'success');
     
@@ -39,19 +27,6 @@ function cancelarRegistro() {
             document.getElementById('password').value = '';
         }
     };
-
-
-
-    //aqui el js para el dropdown de el perfil
-
-    document.getElementById('profileImg').addEventListener('click', ()=>{
-        const dropdownMenu=document.getElementById('dropdownMenu');
-        if (dropdownMenu.style.left=== 'opx'){
-            dropdownMenu.style.left= '-250px';
-            }else{
-                dropdownMenu.style.left='0px';
-            }
-    })
 
 
     /************ js para el formulario de final de el estado del registro *******/
@@ -89,7 +64,6 @@ document.getElementById('form-estado').addEventListener('submit', async function
         const datos = await respuesta.json();
 
         if (respuesta.ok) {
-            
             alert(datos.mensaje);
             cerrarModal();  
         } else {
@@ -98,6 +72,47 @@ document.getElementById('form-estado').addEventListener('submit', async function
         }
     } catch (error) {
         console.error('Error al enviar la solicitud:', error);
-        alert('Ocurrió un error inesperado.');
+        
     }
+});
+
+
+
+
+
+function showLoader(){
+    document.getElementById('loader').style.display = 'flex';
+}
+
+function ocultarLoader(){
+    document.getElementById('loader').style.display = 'none';
+}
+
+document.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', function(event){
+        event.preventDefault();
+        const href=link.getAttribute('href');
+        console.log('loader activado');
+        showLoader();
+
+        setTimeout(() =>{
+            window.location.href=href;
+            ocultarLoader();
+        }, 2000);
+    });
+});
+
+window.addEventListener('beforeunload', function(){
+    showLoader();
+});
+
+
+document.querySelectorAll('form').forEach(function(form){
+    form.addEventListener('submit', function(event){
+        event.preventDefault();
+        showLoader();
+        setTimeout(() =>{
+            form.submit();
+        },2000);
+    });
 });
