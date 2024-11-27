@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>{% block title %}APP JULIAN |{% endblock %}</title> 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style_form_registro.css') }}">
   
@@ -22,9 +22,17 @@
 <header>
     
     {% block header%}
-       <img href="hola" alt="soy la imagen">
-
-       <img src="#" alt="img" class="Profil-img" id="profileImg">
+    
+       <img src="{{ url_for('static', filename='images/logo2.svg') }}" class="logo-img" alt="soy la imagen">
+           
+            
+       <div >
+        <img src="{{ url_for('static', filename='images/perfil.png') }}" class="profile" alt="img" id="profileImg">
+        <div class="span"><span>{{ current_user.usuario }}</span></div>
+       </div>
+    
+       
+       
     {% endblock%}
 </header>
 
@@ -45,18 +53,8 @@
 
 </nav>
 <hr>
-<!--<ul>
-    <li><a href="{{ url_for('main.inicio') }}">Inicio</a></li>
-    <li><a href="{{ url_for('main.register_cliente_dispositivo') }}">Registrar Cliente</a></li>
-    <li><a href="{{ url_for('main.buscar') }}">Buscar</a></li>
-    <li><a id="openPinButton" href="#">Acceder a Registro</a></li>
-</ul>
-  <li class="per">
-        <img src="{{ url_for('static', filename='images/admin.png') }}" alt="Perfil" >
-       <span>{{ current_user.usuario }}</span>
-    </li>
-   <button> <a href="{{ url_for('main.logout') }}">cerrar sessión</a></button>
--->
+
+   
     <div class="container">
         {% block content %}
            <!-- Mensajes Flash -->
@@ -83,9 +81,6 @@
                     </form>
                 </div>
             </div>
-
-           
-            
 
             {% endblock %}
     </div>

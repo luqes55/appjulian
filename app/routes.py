@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request,make_response,jsonify
 from flask_login import login_required, login_user, logout_user, current_user
-from .models import User,db, Cliente, Dispositivo
+from .models import User, Cliente, Dispositivo
 from .database import db
 from datetime import date
 
@@ -101,7 +101,7 @@ def login():
         if user and user.check_password(password):
             login_user(user)
             flash('Inicio de sesión exitoso.', 'success')
-            response = make_response(redirect(url_for('main.inicio')))
+            response = make_response(redirect(url_for('main.dashboard')))
             return response
         else:
             flash('Credenciales inválidas.', 'danger')
@@ -184,32 +184,27 @@ def inicio():
 
 
 #ruta para cambiar el estado de los registros en inicio.html
-
 @main.route('/actualizar_estado', methods=['POST'])
-def actualizar_registro():
+def actualizar_estado():
+    if request.method == 'POST':
     
-    try:
-        estado_id= int(request.form.get('estado_id',0))
-    except ValueError:
-        return jsonify({"error":"Id invalido"}), 400
-    
-    nuevo_estado= request.form.get('estado')
-    if not estado_id or not nuevo_estado:
-        return jsonify({"error":"malo"})
-    
-    if nuevo_estado not in ["pendiente", "entregado"]:
-        return jsonify({"error":"estado invalido"}),400
-    
-    estado = Cliente.query.get(estado_id)
-    if not estado:
-        return jsonify({"error": "estado no encontrado"})
-    
-    estado.estado= nuevo_estado
-    db.session.commit()
-    
-    return jsonify({"mensaje":" estado actualizado con exito",
-                    "id":estado_id,
-                    "nuevo_estado":estado.estado})
+        cliente_id = request.form.get('cliente-id')
+        nuevo_estado = request.form.get('estado')
+
+
+        try:
+            cliente = Cliente.query.get(cliente_id)  
+            if cliente:
+                cliente.estado = nuevo_estado
+                db.session.commit()  
+             
+                flash('Estado actualizado correctamente', 'success')
+            else:
+                flash('Cliente no encontrado','error')
+        except Exception as e:
+            flash(f'Error al actualizar el estado: {str(e)}', 'error')
+
+    return redirect(request.referrer or url_for('main.inicio'))
    
     
     

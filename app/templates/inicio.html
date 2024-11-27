@@ -1,29 +1,22 @@
 {% extends 'dashboard.html' %}
+{% block title %}APP JULIAN | Inicio{% endblock %}
 
+{% block header%}
+    
+       <img src="{{ url_for('static', filename='images/logo2.svg') }}" class="logo-img" alt="soy la imagen">
 
+        <button class="regre">
+        <a class="bot" href="{{ url_for('main.dashboard') }}">Dashboard</a>
+        </button>
+       <a href="{{ url_for('main.inicio') }}"><img src="{{ url_for('static', filename='images/perfil.png') }}"  alt="img" class="Perfil-img" id="profileImg"></a>
+       
+       
+    {% endblock%}
 
 {% block content %}
+
   
     <div id="page_inicio">
-
-
-        <div id="formularioModal" style="display:none;" onclick="actualizar_registro">
-            <div class="modal-content">
-                <h3>registre los datos finales</h3>
-                <form id="estadoform" method="POST" action="/actualizar_registro">
-                    <input type="hidden" name="id" id="idInput">
-                    <label for="nuevoEstado">estado</label>
-                    <select name="nuevoEstado" id="nuevoEstado">
-                        <option value="pendiente">Pendiente</option>
-                        <option value="entregado">entregado</option>
-                    </select>
-    
-                    <button type="submit">guardar</button>
-                    <button type="button" onclick="cerrarformulario()">Cancelar</button>
-                </form>
-            </div>
-        </div>
-
 
         <h3 class="regis_encontrados"> Registros de hoy {{fecha_hoy}} : {{ clientes_hoy|length }}  </h3>
 
@@ -57,7 +50,7 @@
                         <td>{{ cliente.fechaIngreso }}</td>
                         <td>
                             <span class="estado {{'pendiente' if cliente.estado =='pendiente' else 'entregado'}}"
-                                onclick="abrirform({{cliente.id}},'{{ cliente.estado}}')">
+                                onclick="abrirformulario({{cliente.idCliente}},'{{ cliente.estado}}')">
 
                                 {{ cliente.estado }}
                             </span>
@@ -68,30 +61,27 @@
                 {% endfor %}
             </tbody>
         </table>
-
-        <!--modal de ultimo resgistro-->
-
-        <div id="modal-overlay" style="display:none;"></div>
-            <div id="modal" style="display:none;">
-                <h3>acualizar Estado</h3>
-                <form id="form-estado" method="POST" action="/actualizar_estado">
-                    <input type="hidden" name="estado_id" id="estado_id">
-                    <label for="estado">nuevo estado</label>
-                    <select name="estado" id="estado" required>
-                        <option value="pendiente">Pendiente</option>
-                        <option value="entregado">entregado</option>
-                    </select>
-                    <br><br>
-                    <button type="submit">guardar</button>
-                    <button type="button" onclick="cerrarModal()">Cancelar</button>
-                </form>
-            </div>
-        </div>
-    </div> 
+  
     {% else %}
         <p>No hay clientes registrados hoy.</p>
     {% endif %}
-    
-    
-    
+</div>
+<div id="modal-overlay" style="Display:none;"></div>
+<div id="modal" style="Display:none;">
+    <h3>Actualizar Estado</h3>
+    <form id="form-estado" method="POST" action="{{ url_for('main.actualizar_estado') }}">
+        <input type="hidden" id="cliente-id" name="cliente-id">
+        <label for="estado">Nuevo estado:</label>
+        <select name="estado" id="estado" required>
+            <option value="pendiente">Pendiente</option>
+            <option value="entregado">Entregado</option>
+        </select>
+        <br><br>
+        <button type="submit">Guardar</button>
+        <button type="button" onclick="cerrarModal()">Cancelar</button>
+    </form>
+</div>
+
+
 {% endblock %}
+

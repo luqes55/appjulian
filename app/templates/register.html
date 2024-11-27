@@ -1,9 +1,18 @@
 <!-- templates/register.html -->
 
+{% extends 'dashboard.html' %}
+{% block title %}APP JULIAN | REGISTER-USER {% endblock %}
+{% block header%}
+    <img src="{{ url_for('static', filename='images/logo2.svg') }}" class="logo-img" alt="soy la imagen">
 
+            <button class="regre">
+                <a class="bot" href="{{ url_for('main.inicio') }}">Back</a>
+            </button>
 
-    {% extends 'dashboard.html' %}
+    
+            <a href="{{ url_for('main.inicio') }}"><img src="{{ url_for('static', filename='images/perfil.png') }}"  alt="img" class="Perfil-img" id="profileImg"></a>
 
+    {% endblock%}
 {% block content %}
     
     <form class="form-regis" method="POST" action="{{ url_for('main.register_user') }}">

@@ -19,15 +19,46 @@ header{
     display: flex;
     
 }
-
-header .Profil-img{
+.profile{
     width: 40px;
-    height: 40px;
-    border-radius:50px;
-    cursor: pointer;
-    border: 2 solid #ffffff;
+    position: relative;
+    left: 5px;
+    
+}
+header span {
+    color:#1270b0;
+    position: relative;
+    top:-5px;
+    left:0px;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header div{
+    width: 50px;
+    height: 60px;
     position: absolute;
-    right: 34px;
+    right: 45px;
+    top: 10px;
+    justify-content: center;
+    padding: auto;
+}
+.span{
+    width: auto;
+    height: 13px;
+    background-color: #dde3e6;
+    position: relative;
+    top:-2px;
+    left:0px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.logo-img{
+    width: 120px;
+    height: 80px;
+    position: relative;
+    left: 80px;
 }
 
     .container {
@@ -44,6 +75,7 @@ header .Profil-img{
         padding: 10px;
         
     }
+    
     nav.contenedor_nav{
         height: auto;
         width: 100%;
@@ -600,7 +632,7 @@ form button:hover {
 
 #modal{
     display: none;
-    position: fixed;
+    position: absolute;
     top:50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -608,12 +640,12 @@ form button:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 20px;
     border-radius: 10px;
-    z-index: 1000;
+    z-index:999;
 }
 
 #modal-overlay{
     display: none;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
