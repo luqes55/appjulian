@@ -19,7 +19,7 @@
 {% block content %}
 
 <!-- Formulario combinado de Cliente y Dispositivo -->
-<form id="clien" action="{{ url_for('main.register_cliente_dispositivo', idCliente=cliente.idCliente) }}" method="post">
+<form id="clien" action="{{ url_for('main.register_cliente_dispositivo', idCliente=cliente.idCliente) }}" method="post" onsubmit="return validarFormulario()">
     <div class="clien">
         <!-- Datos del Cliente -->
         <fieldset class="fiel">
