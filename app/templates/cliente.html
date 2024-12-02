@@ -33,7 +33,7 @@
             </div>
             <div>
                 <label for="nit">NIT:</label>
-                <input type="text" id="nit" name="nit" value="{{ cliente.nit }}" placeholder="Cc. Cliente" required>
+                <input type="number" id="nit" name="nit" value="{{ cliente.nit }}" placeholder="Cc. Cliente" required>
             </div>
             <div>
                 <label for="correo">Correo:</label>
@@ -45,7 +45,7 @@
             </div>
             <div>
                 <label for="telefono">Teléfono:</label>
-                <input type="text" id="telefono" name="telefono" value="{{ cliente.telefono }}" placeholder="Tel/celular" required>
+                <input type="number" id="telefono" name="telefono" value="{{ cliente.telefono }}" placeholder="Tel/celular" required>
             </div>
             <div>
                 <label for="fechaIngreso">Fecha registro:</label>
@@ -60,7 +60,7 @@
             <!-- primer div-->
             <div class="datos_cliente">
                 <div>
-                    <input type="text" id="Imei" name="Imei" value="{{ dispositivo.Imei }}" placeholder="IMEI del dispositivo" required>
+                    <input type="number" id="Imei" name="Imei" value="{{ dispositivo.Imei }}" placeholder="IMEI del dispositivo" required>
                 </div>
                 <div>
                     <input type="text" id="modelo" name="modelo" value="{{ dispositivo.modelo }}" placeholder="Modelo del telefono" required>
@@ -69,10 +69,10 @@
                     <input type="text" id="clave_tel" name="clave_tel" value="{{ dispositivo.clave_tel }}" placeholder="Clave del telefono" required>
                 </div>
                 <div>
-                    <input type="text" id="abono" name="abono" value="{{ dispositivo.abono }}" placeholder="Abono" required>
+                    <input type="number" step="0.01" min="0" id="abono" name="abono" value="{{ dispositivo.abono }}" placeholder="Abono" required>
                 </div>
                 <div>
-                    <input type="text" id="estado" name="estado" value="{{ cliente.estado }}" selected >
+                    <input type="text" id="estado" name="estado" value="{{ cliente.estado }}" readonly >
                 </div>
             </div>
             <!-- segundo div-->
