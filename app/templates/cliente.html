@@ -1,203 +1,177 @@
+{% extends 'inicio.html' %}
+{% block title %}APP JULIAN | Nuevo Registro{% endblock %}
 
-   
-    {% extends 'dashboard.html' %}
-    {% block title %}APP JULIAN | Nuevo Registro{% endblock %}
+{% block nav %}
+<div class="contenedor_nav">
+    <button class="registro_nuevo"><a href="{{ url_for('main.register_cliente_dispositivo') }}">Registrar</a></button>
     
-   
+    <button class="regre">
+        <a class="bot" href="{{ url_for('main.inicio') }}">INICIO</a>
+    </button>
 
-    {% block content %}
-    
-    <!-- Formulario combinado de Cliente y Dispositivo -->
-    <form id="clien" action="{{ url_for('main.register_cliente_dispositivo') }}" method="post">
-        <div class="clien">
-            <!-- Datos del Cliente -->
-            <fieldset class="fiel">
-                
+    <form class="busqueda" method="GET" action="{{ url_for('main.buscar') }}">
+        <input type="text" name="query" placeholder="Buscar por nombre o NIT" required>
+        <button class="buscal" type="submit">Buscar</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<!-- Formulario combinado de Cliente y Dispositivo -->
+<form id="clien" action="{{ url_for('main.register_cliente_dispositivo', idCliente=cliente.idCliente) }}" method="post">
+    <div class="clien">
+        <!-- Datos del Cliente -->
+        <fieldset class="fiel">
             <div>
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre"  placeholder="Nombres" required>
+                <input type="text" id="nombre" name="nombre" value="{{ cliente.nombre }}" placeholder="Nombres" required>
             </div>
             <div>
                 <label for="apellidos">Apellidos:</label>
-                <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" required>
+                <input type="text" id="apellidos" name="apellidos" value="{{ cliente.apellidos }}" placeholder="Apellidos" required>
             </div>
             <div>
                 <label for="nit">NIT:</label>
-                <input type="text" id="nit" name="nit" placeholder="Cc. Cliente" required>
+                <input type="text" id="nit" name="nit" value="{{ cliente.nit }}" placeholder="Cc. Cliente" required>
             </div>
             <div>
                 <label for="correo">Correo:</label>
-                <input type="email" id="correo" name="correo" placeholder="Correo electronico"required>
+                <input type="email" id="correo" name="correo" value="{{ cliente.correo }}" placeholder="Correo electronico" required>
             </div>
             <div>
                 <label for="direccion">Dirección:</label>
-                <input type="text" id="direccion" name="direccion" placeholder="Direccion de residencia"required>
+                <input type="text" id="direccion" name="direccion" value="{{ cliente.direccion }}" placeholder="Direccion de residencia" required>
             </div>
             <div>
                 <label for="telefono">Teléfono:</label>
-                <input type="text" id="telefono" name="telefono" placeholder="Tel/celular" required>
+                <input type="text" id="telefono" name="telefono" value="{{ cliente.telefono }}" placeholder="Tel/celular" required>
             </div>
             <div>
                 <label for="fechaIngreso">Fecha registro:</label>
-                <input type="date" id="fechaIngreso" name="fechaIngreso" required>
-            </div>
-            </fieldset>
-        </div>
-
-       
-            <!-- Datos del Dispositivo -->
-    <fieldset id="dispo">   
-            
-            <div class="conte">
-
-                <!-- primer div-->
-                    <div class="datos_cliente">
-
-                            <div>
-                                <input type="text" id="Imei" name="Imei" placeholder="IMEI del dispositivo" required>
-                            </div>
-                            <div>
-                                
-                                <input type="text" id="modelo" name="modelo" placeholder="Modelo del telefono" required>
-                            </div>
-                            <div>
-                                
-                                <input type="text" id="clave_tel" name="clave_tel" placeholder="clave del telefono" required>
-                            </div>
-                            <div>
-                                
-                                <input type="text" id="abono" name="abono" placeholder="Abono" required>
-                            </div>
-                            <div>
-                                
-                                <input type="text" id="estado" name="estado" value="pendiente" selected>
-                
-                            </div>
-
-                    </div>
-                <!-- segundo div-->
-                    <div class="datos_cliente">
-                            <div>
-                            
-                            <select id="maraca" name="marca" required>
-                                    <option value="">Marca telefono</option>
-                                    <option value="Iphone">Iphone</option>
-                                    <option value="Samgung">Samsung</option>
-                                    <option value="Motorola">Motorola</option>
-                                    <option value="Huawei">Huawei</option>
-                                    <option value="Oppo">Oppo</option>
-                                    <option value="Alcatel">Alcatel</option>
-                                    <option value="Zt">zt</option>
-                            </select>
-                            </div>
-                                
-                            
-                            <div>
-                               
-                                <select id="per_recibe" name="per_recibe" required>
-                                    <option value="">Persona que recibe</option>
-                                    <option value="Julian">Julian</option>
-                                    <option value="Camila">Camila</option>
-                                    <option value="Manuel">Manuel</option>
-                                
-                                </select>
-                            </div>
-                            <div>
-                                
-                                <select id="color" name="color" required>
-                                    <option value="">Color telefono</option>
-                                    <option value="amarillo">Amarillo</option>
-                                    <option value="verde">Verde</option>
-                                    <option value="azul">Azul</option>
-                                    <option value="rojo">Rojo</option>
-                                </select>
-                            </div>
-                        
-                            <div>
-                               
-                                <select id="display_quebrado" name="display_quebrado" required>
-                                    <option value="">Estado Display</option>
-                                    <option value="bueno">Bueno</option>
-                                    <option value="rallado">Rayado</option>
-                                    <option value="quebrado">Quebrado</option>
-                                    
-                                </select>
-                            </div>
-                            
-                            <div>
-
-                                
-                                <select id="tapa" name="tapa_quebrada" required>
-                                    <option value="">Estado tapa Telefono</option>
-                                    <option value="buena"> Buena</option>
-                                    <option value="buena"> Rayada</option>
-                                    <option value="quebrada"> Quebrada</option>
-                                </select>
-                            </div>
-                    </div>
-
-                     <!-- tercer div-->
-                    <div class="datos_cliente">
-                            <div>
-                                
-                                <select id="enciende" name="enciende" required>
-                                    <option value="">Telefono Enciende</option>
-                                    <option value="si"> Sí</option>
-                                    <option value="no"> No</option>
-                                </select>
-                            </div>
-                            <div>
-                                
-                                <select id="botones" name="botones" required>
-                                    <option value="">Tiene todos los botones</option>
-                                    <option value="si">Sí</option>
-                                    <option value="no">No</option>
-                                </select>
-                            </div>
-                            <div>
-                               
-                                <select id="bandeja_sim" name="bandeja_sim" required>
-                                    <option value=""> Tiene la bandeja Simcard</option>
-                                    <option value="si">Sí</option>
-                                    <option value="no">No</option>
-                                </select>
-                            </div>
-                            <div>
-                                
-                                <select id="estuche" name="estuche" required>
-                                    <option value="">Trae estuche</option>
-                                    <option value="si">Sí</option>
-                                    <option value="no">No</option>
-                                </select>
-                            </div>
-                            <div>
-                                
-                                <select id="simcard" name="simcard" required>
-                                    <option value="">Trae Simcard</option>
-                                    <option value="si">Sí</option>
-                                    <option value="no">No</option>
-                                </select>
-                            </div>
-                    </div>
-                     
+                <input type="date" id="fechaIngreso" name="fechaIngreso" value="{{ cliente.fechaIngreso }}" required>
             </div>
         </fieldset>
-            <div>
-                <textarea id="detalles" name="detalles" placeholder="Detalles del dispositivo" required></textarea>
+    </div>
+
+    <!-- Datos del Dispositivo -->
+    <fieldset id="dispo">   
+        <div class="conte">
+            <!-- primer div-->
+            <div class="datos_cliente">
+                <div>
+                    <input type="text" id="Imei" name="Imei" value="{{ dispositivo.Imei }}" placeholder="IMEI del dispositivo" required>
+                </div>
+                <div>
+                    <input type="text" id="modelo" name="modelo" value="{{ dispositivo.modelo }}" placeholder="Modelo del telefono" required>
+                </div>
+                <div>
+                    <input type="text" id="clave_tel" name="clave_tel" value="{{ dispositivo.clave_tel }}" placeholder="Clave del telefono" required>
+                </div>
+                <div>
+                    <input type="text" id="abono" name="abono" value="{{ dispositivo.abono }}" placeholder="Abono" required>
+                </div>
+                <div>
+                    <input type="text" id="estado" name="estado" value="{{ cliente.estado }}" selected >
+                </div>
             </div>
-            <div class="but">
-                <button class="guarda" type="submit">Guadar</button>
-                <button class="cancelar" type="reset" >Limpia</button>
+            <!-- segundo div-->
+            <div class="datos_cliente">
+                <div>
+                    <select id="marca" name="marca" required>
+                        <option value="{{ dispositivo.marca }}">{{ dispositivo.marca }}</option>
+                        <option value="Iphone">Iphone</option>
+                        <option value="Samsung">Samsung</option>
+                        <option value="Motorola">Motorola</option>
+                        <option value="Huawei">Huawei</option>
+                        <option value="Oppo">Oppo</option>
+                        <option value="Alcatel">Alcatel</option>
+                        <option value="Zt">Zt</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="per_recibe" name="per_recibe" required>
+                        <option value="{{ dispositivo.per_recibe }}">{{ dispositivo.per_recibe }}</option>
+                        <option value="Julian">Julian</option>
+                        <option value="Camila">Camila</option>
+                        <option value="Manuel">Manuel</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="color" name="color" required>
+                        <option value="{{ dispositivo.color }}">{{ dispositivo.color }}</option>
+                        <option value="amarillo">Amarillo</option>
+                        <option value="verde">Verde</option>
+                        <option value="azul">Azul</option>
+                        <option value="rojo">Rojo</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="display_quebrado" name="display_quebrado" required>
+                        <option value="{{ dispositivo.display_quebrado }}">{{ dispositivo.display_quebrado }}</option>
+                        <option value="bueno">Bueno</option>
+                        <option value="rayado">Rayado</option>
+                        <option value="quebrado">Quebrado</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="tapa_quebrada" name="tapa_quebrada" required>
+                        <option value="{{ dispositivo.tapa_quebrada }}">{{ dispositivo.tapa_quebrada }}</option>
+                        <option value="buena">Buena</option>
+                        <option value="rayada">Rayada</option>
+                        <option value="quebrada">Quebrada</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- tercer div-->
+            <div class="datos_cliente">
+                <div>
+                    <select id="enciende" name="enciende" required>
+                        <option value="{{ dispositivo.enciende }}">{{ dispositivo.enciende }}</option>
+                        <option value="si">Sí</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="botones" name="botones" required>
+                        <option value="{{ dispositivo.botones }}">{{ dispositivo.botones }}</option>
+                        <option value="si">Sí</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="bandeja_sim" name="bandeja_sim" required>
+                        <option value="{{ dispositivo.bandeja_sim }}">{{ dispositivo.bandeja_sim }}</option>
+                        <option value="si">Sí</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="estuche" name="estuche" required>
+                        <option value="{{ dispositivo.estuche }}">{{ dispositivo.estuche }}</option>
+                        <option value="si">Sí</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="simcard" name="simcard" required>
+                        <option value="{{ dispositivo.simcard }}">{{ dispositivo.simcard }}</option>
+                        <option value="si">Sí</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
             </div>
         </div>
-       
+    </fieldset>
 
-                   
-                
-        
+    <div>
+        <textarea id="detalles" name="detalles" placeholder="Detalles del dispositivo" required>{{ dispositivo.detalles }}</textarea>
+    </div>
+    <div class="but">
+        <button class="guarda" type="submit">Guardar</button>
+        <button class="cancelar" type="reset"><a href="{{ url_for('main.inicio') }}">Cancelar</a></button>
     </div>
 </form>
-   
 
-    {% endblock %}
-    
+{% endblock %}

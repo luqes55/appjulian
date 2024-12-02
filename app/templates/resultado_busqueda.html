@@ -1,20 +1,27 @@
 
 
-    {% extends 'dashboard.html' %}
+    {% extends 'inicio.html' %}
     {% block title %}APP JULIAN | Busqueda{% endblock %}
    
-   
-    {% block content %}
+    {% block nav %}
+    <div class="contenedor_nav">
+        
+        <button class="registro_nuevo"><a href="{{ url_for('main.register_cliente_dispositivo') }}">Registrar<a/> </button>
+        
+            <button class="regre">
+                <a class="bot" href="{{ url_for('main.inicio') }}">INICIO</a>
+                </button>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        <div class="flashes">
-            {% for category, message in messages %}
-                <div class="flash {{ category }}">{{ message }}</div>
-            {% endfor %}
-        </div>
-    {% endif %}
-{% endwith %}
+            <form class="busqueda" method="GET" action="{{ url_for('main.buscar') }}">
+                <input type="text" name="query" placeholder="Buscar por nombre o NIT" required>
+                <button class="buscal" type="submit">Buscar</button>
+            </form>
+    </div> 
+    {% endblock%}
+    {% block content %}
+    
+
+    
 
     <div id="page_inicio">
         

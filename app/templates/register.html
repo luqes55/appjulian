@@ -3,20 +3,13 @@
 {% extends 'dashboard.html' %}
 {% block title %}APP JULIAN | REGISTER-USER {% endblock %}
 
+
 {% block content %}
-
-    <div id="page_inicio">
-{% with messages = get_flashed_messages(with_categories=true) %}
-{% if messages %}
-    <div class="flashes">
-        {% for category, message in messages %}
-            <div class="flash {{ category }}">{{ message }}</div>
-        {% endfor %}
-    </div>
-{% endif %}
-{% endwith %}
+    
+    <section>
 
 
+    <div class="registroUser">
     <form  class="form-regis" method="POST" action="{{ url_for('main.register_user') }}">
         <h3 >registro de nuevo usuario</h3>
         <label for="usuario">Usuario:</label>
@@ -27,14 +20,16 @@
         
         <h2>crea un pin</h2>
         <input type="password" name="pin" placeholder="1234.." required>
-        <button type="button" id="canUser">cancelar</button>
+        <button type="button"><a style="color:#ffffff" href="{{url_for('main.dashboard')}}">cancelar</a></button>
         <button type="submit">Registrar</button>
         
     </form>
-
 </div>
+</section>
+
     {% endblock %}
-   
+    
+    
 
 
 

@@ -18,7 +18,7 @@ class Cliente(db.Model):
     fechaIngreso = db.Column(db.Date, nullable=False)
     estado=db.Column(Enum('pendiente','entregado', name='estado_enum'), nullable=False)
 
-
+    dispositivos = db.relationship('Dispositivo', backref='cliente', lazy=True)
 # Modelo de Dispositivo
 class Dispositivo(db.Model):
     __tablename__ = 'dispositivo'
@@ -66,3 +66,20 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return f"user('{self.usuario}')"
+    def __repr__(self):
+        return f'<User {self.usuario}>'
+
+
+class reportefinal(db.Model):
+    __tablename__ = 'reportefinal'
+    idreporte=db.Column(db.BigInteger, primary_key=True)
+    idDispositivo = db.Column(db.BigInteger, db.ForeignKey('dispositivo.idDispositivo'), nullable=False)
+    tec_arregla=db.Column(db.String(20), nullable=False)
+    fechaEntrega=db.Column(db.Date, nullable=False)
+    provedorRepuesto=db.Column(db.String(30), nullable=False)
+    valorRepuesto=db.Column(db.Numeric(10, 2), nullable=False)
+    nombreRepuesto=db.Column(db.String(20), nullable=False)
+    valorArreglo=db.Column(db.Numeric(10, 2), nullable=False)
+    
+    
+    

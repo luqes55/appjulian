@@ -1,107 +1,71 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}APP JULIAN |{% endblock %}</title> 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_form_registro.css') }}">
-  
-</head>
-<body>
-    <div id="loader" style="color:red;">
-        <div class="spiner">cargando</div>
-    </div>
-   
-    <!--
-    <nav class="sidebar">
-            <div class="profi">
-                <h1 class="page-title">{{page_title }}</h1>
-            </div>  
-    </nav>
--->
+{% extends 'inicio.html'%}
 
-<header>
+    <title>{% block title %}APP JULIAN |Dashboard{% endblock %}</title> 
     
-    {% block header%}
+
     
-       <img src="{{ url_for('static', filename='images/logo2.svg') }}" class="logo-img" alt="soy la imagen">
-           
-            
-       <div  class="dropdown">
-        <img src="{{ url_for('static', filename='images/iconadmin1.png') }}" class="profile" >
-        <div class="span"><span> Admin {{ current_user.usuario }}</span>
-                <div class="dropdown-menu" >
-                   
-                    <a href="{{url_for('main.buscar')}}">Editar perfil</a>
-                    <a href="#" id="openModalLink">Crear nuevo usuario</a>
-                    <a href="{{url_for('main.logout')}}">Cerrar sessión</a>
-                </div>
-
-       </div>
-
-
-        <!-- modal para el pin de acceso -->
         
-        <div id="pinModal" class="modal" style="display:none;">
-            <div class="modal-content">
-                <h3>Ingresa su PIN de acceso</h3>
-                <form class="can" action="{{ url_for('main.validate_pin') }}" method="POST">
-                    <input type="password" name="pin" placeholder="PIN" required>
-                    <button class="cancel" type="button" id="closeModal">Cancelar</button>
-                    <button class="validar" type="submit">Validar</button>
-                    <p style="color:red; display:none;" id="errorMessage">PIN incorrecto</p>
-                </form>
-            </div>
-        </div>
-          
-    {% endblock%}
-</header>
-
-<nav>
-
-    <div class="contenedor_nav">
-        
-        <button class="registro_nuevo"><a href="{{ url_for('main.register_cliente_dispositivo') }}">Registrar<a/> </button>
-            <button class="regre">
-                <a class="bot" href="{{ url_for('main.dashboard') }}">Dashboard</a>
-            </button>  
-            <button class="regre">
-                <a class="bot" href="{{ url_for('main.inicio') }}">INICIO</a>
-            </button>
-            <form class="busqueda" method="GET" action="{{ url_for('main.buscar') }}">
-                <input type="text" name="query" placeholder="Buscar por nombre o NIT" required>
-                <button class="buscal" type="submit">Buscar</button>
-            </form>
-    </div> 
-
-</nav>
-<hr>
-
-   
-    <div class="container">
-
-       
         
         {% block content %}
 
-        
-           <!-- Mensajes Flash -->
-           {% with messages = get_flashed_messages(with_categories=true) %}
-           {% if messages %}
-               <div class="flashes">
-                   {% for category, message in messages %}
-                       <div class="flash {{ category }}">{{ message }}</div>
-                   {% endfor %}
-               </div>
-           {% endif %}
-       {% endwith %}
-        
-         
+        <div id="page_inicio">
+        <button class="validar" ><a  href="#" id="openModalLink">
+            Registrar usuario
+            <img  src="{{ url_for('static', filename='images/mas.png') }}">
+        </a></button>
+    <section>
+       
+    
+        <div class="contenUser">
+            <h3>Usuarios Registrados</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Usuario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.id }}</td>
+                        <td>{{ usuario.usuario }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="2">No hay usuarios registrados.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="contenUser1">
+            <h3 class="regis_encontrados"> Registros de hoy: {{ clientes_hoy|length }}  </h3>
+        </div>
 
-            {% endblock %}
+    </section>
+</div>
+ <!-- modal para el pin de acceso -->
+        
+ <div id="pinModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <h3>Ingresa su PIN de acceso</h3>
+        <form class="formValidarPin"  method="POST" action="{{ url_for('main.validate_pin') }}">
+            <input type="password" name="pin" placeholder="PIN" required>
+            <button class="validar1" id="pin">Validar</button>
+            <button class="cancel" type="button" id="closeModal">Cancelar</button>
+            <p style="color:red; display:none;" id="errorMessage">PIN incorrecto</p>
+        </form>
     </div>
-                
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-</body>
-</html>
+
+
+    </div>
+
+    {% endblock%}
+
+    
+
+    
+
+            
+    

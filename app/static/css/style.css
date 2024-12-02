@@ -17,6 +17,7 @@ header{
     width: 100%;
     height: 67px;
     display: flex;
+    justify-content: space-between;
     
 }
 .dropdown img{
@@ -30,8 +31,7 @@ header{
 .dropdown{
     position: relative;
     display: inline-block;
-    left:1300px ;
-    height: 45px;
+    
     
 }
 
@@ -78,7 +78,6 @@ header{
     left: 5px;
     
 }
-
 
 header span {
     color:#f6f7f7;
@@ -134,7 +133,6 @@ header div{
     nav.contenedor_nav{
         height: auto;
         width: 100%;
-        
     }
 
     .contenedor_nav .registro_nuevo{
@@ -150,21 +148,45 @@ header div{
         color: #ffff;
     }
     .regre{
-        background-color:#000;
+        background-color:transparent;
         width: auto;
         height: 30px;
         margin: 0%;
-        padding: 0px;
+        padding: 5px;
         position: relative;
         top: 20px;
-        left:550px;
+        left:680px;
+        
         
     }
-    .bot{
-        color: #ffff;
-        font-size: 20px;
-        height:20px;
-        height: 20px;
+    .regre a{
+        color: #ffffff;
+        font-size: 19px;
+    }
+    
+
+    .bo{
+        background-color:#0c3def;
+        margin:0;
+        width:30px;
+        height: 25px;
+        padding:0px
+    }
+    .bi{
+        background-color:#d40a1e;
+        margin:0;
+        width:30px;
+        height: 25px;
+        padding:0px
+    }
+    .bo:hover{
+        background-color:#0c3def;
+    }
+    .bi:hover{
+        background-color:#d40a1e;
+    }
+    .regre:hover{
+        background-color: #28a745;
     }
 
     form.busqueda{
@@ -524,10 +546,6 @@ form {
     margin:0;
 }
 
-
-
-
-
 form label {
     display: block;
     margin: 10px 0 5px;
@@ -643,32 +661,58 @@ form button:hover {
 
 
 .modal-content input{
-    width: 90%;
-    
+    width: 90%;  
     
 }
 
-.modal-content h2{
-    color: #0e29f9;
-}
-.can{
+.formValidarPin{
     margin: auto;
     height: auto;
 }
 .validar{
-    margin-top: 20px;
+    margin: 10px; 
+    padding:7px;
+    background-color: #1270b0;
+    border-radius: 20PX;
+    
+}
+.validar a{
+    color: #fff;
+    font-size: 15px;
+    padding: 3px;
+    
+    
+}
+.validar a img{
+    width: 20px;
     position: relative;
-    left: -200px;
+    bottom: -5px;
+    margin: 0%;
+    
+}
+.validar1{
+    margin:10px;
+    position: relative;
+    
     background-color: #1270b0;
     
 }
 .cancel{
     background-color: #1270b0;
-    margin-top: 20px;
+    margin: 10px;
     position: relative;
-    left: -40px;
+    background-color: #dc3545;
+    
 }
-
+.cancel:hover{
+    background-color: #fa071f;
+}
+.validar:hover{
+    background-color: #29425c;
+}
+.validar1:hover{
+    background-color: #29425c;
+}
 
 .modal.modal-content{
     overflow: hidden;
@@ -685,15 +729,25 @@ form button:hover {
 
 #modal{
     display: none;
-    position: absolute;
-    top:50%;
+    position: relative;
+    top:-400px;
     left: 50%;
+    margin: 0%;
+    width: 1000px;
+    height: 600px;
+    padding: 7px;
     transform: translate(-50%, -50%);
     background: #ffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 20px;
     border-radius: 10px;
-    z-index:999;
+    z-index: 1000;
+    text-align: center;
+    
+    
+}
+#modal h3{
+    margin: 0%;
 }
 
 #modal-overlay{
@@ -704,9 +758,29 @@ form button:hover {
     width: 100%;
     height: 100%;
     background:rgba(0, 0, 0, 0.5) ;
-    z-index: 999;
+    z-index: 1000;
+    padding: 0%;
+    
 }
+ #form-estado{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+    width: auto;
+    height: 75vh;
+    margin: 2%;
+    padding: 5px;
+ }
+.finalInfo input{
+    width: 120px;
+    border:solid 2px #0c3def;
 
+}
+.finalInfo{
+    width: 50%;
+    border: solid 2px #1c202d;
+}
 
 .estado{
     padding: 5px 10px;
@@ -761,3 +835,6 @@ form button:hover {
         transform: rotate(360deg);
     }
  }
+
+
+ 

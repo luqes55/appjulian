@@ -1,6 +1,74 @@
-{% extends 'dashboard.html' %}
-{% block title %}APP JULIAN | Inicio{% endblock %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}APP JULIAN |Inicio{% endblock %}</title> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styloDash.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_form_registro.css') }}">
+  
+</head>
+<body>
+    <div id="loader" style="color:red;">
+        <div class="spiner"></div>
+    </div>
+   
+<header>
+    
+    {% block header%}
+    <div id="reloj" style="position:absolute;left:570px;top:-4px;color:#fff;font-size:50px;font-family:Impact"></div>
+       <img src="{{ url_for('static', filename='images/logo2.svg') }}" class="logo-img" alt="soy la imagen">
+        
+       <button class="regre"><a href="{{ url_for('main.inicio') }}">
+        <img src="{{ url_for('static', filename='images/Vector.png') }}" >
+        Atras<a/> </button>
+        
+       <div  class="dropdown">
+        <img src="{{ url_for('static', filename='images/iconadmin1.png') }}" class="profile" >
+        <div class="span"><span> Admin {{ current_user.usuario }}</span>
+                <div class="dropdown-menu" >
+                    
+                    <a href="{{url_for('main.dashboard')}}" >Dashboard</a>
+                    
+                    <a href="{{url_for('main.logout')}}">Cerrar sessión</a>
+                </div>
 
+       </div>
+
+
+       
+          
+    {% endblock%}
+</header>
+
+<nav>
+    {% block nav %}
+    <div class="contenedor_nav">
+        
+        <button class="registro_nuevo"><a href="{{ url_for('main.register_cliente_dispositivo') }}">Registrar<a/> </button>
+        
+            <form class="busqueda" method="GET" action="{{ url_for('main.buscar') }}">
+                <input type="text" name="query" placeholder="Ejm: nombre,NIT o fecha de ingreso" required>
+                <button class="buscal" type="submit">Buscar</button>
+            </form>
+    </div> 
+    {% endblock%}
+</nav>
+<hr>
+
+   
+    <div class="container">
+         <!-- Mensajes Flash -->
+         {% with messages = get_flashed_messages(with_categories=true) %}
+         {% if messages %}
+             <div class="flashes">
+                 {% for category, message in messages %}
+                     <div class="flash {{ category }}">{{ message }}</div>
+                 {% endfor %}
+             </div>
+         {% endif %}
+     {% endwith %}
     
       
 
@@ -9,9 +77,20 @@
   
     <div id="page_inicio">
 
-        <h3 class="regis_encontrados"> Registros de hoy {{fecha_hoy}} : {{ clientes_hoy|length }}  </h3>
-
+        
+        
+        
+          
+        
+        <div class="vista-selector">
+            <button id="clientes-btn" class="btn-toggle" onclick="mostrarClientes()">Clientes</button>
+            <button id="dispositivos-btn" class="btn-toggle" onclick="mostrarDispositivos()">Dispositivos</button>
+        </div>
+<div id="clientes-view" class="view">
+    <h3> Clientes registrados hoy</h3>
     {% if clientes_hoy %}
+    
+    
         <table>
             <thead>
                 <tr> 
@@ -23,7 +102,13 @@
                     <th>Dirección</th>
                     <th>Teléfono</th>
                     <th>fecha de ingreso</th>
-                    <th>estado</th>
+                    <th style="width:50px;">estado</th>
+                    <th style=" width:30px;">Actualizar</th>
+                    <th style=" width:30px;">ver</th>
+                    
+                   
+                    
+
 
                     
                 </tr>
@@ -39,6 +124,7 @@
                         <td>{{ cliente.direccion }}</td>    
                         <td>{{ cliente.telefono }}</td>
                         <td>{{ cliente.fechaIngreso }}</td>
+                        
                         <td>
                             <span class="estado {{'pendiente' if cliente.estado =='pendiente' else 'entregado'}}"
                                 onclick="abrirformulario({{cliente.idCliente}},'{{ cliente.estado}}')">
@@ -46,33 +132,114 @@
                                 {{ cliente.estado }}
                             </span>
                         </td>
+                        <td><button class="bo"><a href="{{ url_for('main.register_cliente_dispositivo', idCliente=cliente.idCliente) }}"><img style="margin-top:1px;width:23px;heigth:20px" src="{{ url_for('static', filename='images/actua.png') }}"></a></button></td>
+                    
+                        <td>
+                            <button class="bo"><a href="#"><img style="margin-top:1px;width:23px;heigth:20px" src="{{ url_for('static', filename='images/ver.png') }}"></a></button>
+                            
+                        </td>
                     </tr>
 
                      
                 {% endfor %}
             </tbody>
         </table>
+         <!-- Paginación -->
+    <div class="pagination">
+        {% if prev_url %}
+            <a href="{{ prev_url }}">Anterior</a>
+        {% endif %}
+        {% if next_url %}
+            <a href="{{ next_url }}">Siguiente</a>
+        {% endif %}
+    </div>
   
     {% else %}
         <p>No hay clientes registrados hoy.</p>
     {% endif %}
 </div>
+<div id="dispositivos-view" class="view" style="display: none;">
+    {% if dispositivos_hoy %}
+    <h3>Dispositivos Registrados Hoy</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Id dispositivo</th>
+                <th>id cliente</th>
+                <th>Imei</th>
+                <th>marca</th>
+                <th>modelo</th>
+                <th>color</th>
+                <th>persona recibio</th>
+                <th>detalles</th>
+                 <!-- Nueva columna para los dispositivos -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for dispositivo in  dispositivos_hoy %}
+                <tr>
+                    <td>{{ dispositivo.idDispositivo }}</td>
+                    <td>{{ dispositivo.idDispositivo }}</td>
+                    <td>{{ dispositivo.Imei }}</td>
+                    <td>{{ dispositivo.marca }}</td>
+                    <td>{{ dispositivo.modelo }}</td>
+                    <td>{{ dispositivo.color}}</td>
+                    <td>{{ dispositivo.per_recibe }}</td>
+                    <td>{{ dispositivo.detalles }}</td>
+                    
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Paginación -->
+    <div class="pagination">
+        {% if prev_url %}
+            <a href="{{ prev_url }}">Anterior</a>
+        {% endif %}
+        {% if next_url %}
+            <a href="{{ next_url }}">Siguiente</a>
+        {% endif %}
+    </div>
+
+{% else %}
+    <p>No hay dispositivos registrados hoy.</p>
+{% endif %}
+</div>
+
+</div>
+{% endblock %}
+
+</div>
 <div id="modal-overlay" style="Display:none;"></div>
 <div id="modal" style="Display:none;">
     <h3>Actualizar Estado</h3>
+    
     <form id="form-estado" method="POST" action="{{ url_for('main.actualizar_estado') }}">
+        <div class="finalInfo">
         <input type="hidden" id="cliente-id" name="cliente-id">
         <label for="estado">Nuevo estado:</label>
         <select name="estado" id="estado" required>
             <option value="pendiente">Pendiente</option>
             <option value="entregado">Entregado</option>
         </select>
-        <br><br>
-        <button type="submit">Guardar</button>
-        <button type="button" onclick="cerrarModal()">Cerrar</button>
+        <input type="hidden" name="idDispositivo" >
+        <input type="text" name="tec_arregla" >
+        <input type="date" name="fechaEntrega" >
+        <input type="text" name="provedorRepuesto" >
+    </div>
+    <div class="finalInfo">
+       
+        <input type="number" name="valorRepuesto" >
+        <input type="text" name="nombreRepuesto" >
+        <input type="number" name="valorArreglo" >
+        
+    </div>
+        <button style="position:absolute;left:130px" type="submit">Guardar</button>
+        <button style="position:absolute" type="button" onclick="cerrarModal()">Cerrar</button>
     </form>
+
 </div>
-
-
-{% endblock %}
-
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

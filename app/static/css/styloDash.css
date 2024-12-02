@@ -1,0 +1,268 @@
+/**************** stylos para el dashboard**********/
+body{
+    margin: 0%;
+    padding: 0%;
+    background-color: #fcfcfc;
+}
+#containerDas{
+    width: 100%;
+    height: auto;
+    display: flex;
+    gap: 20px;
+    z-index: 1000;
+    
+    
+}
+
+
+ #header{
+    text-align: center;
+    width:300px;
+    height: 80px;
+    background-color: #ededf2;
+    margin: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    
+ }
+ #header h1{
+    color: #1270b0; 
+    font-size:60px;
+    font-family:fantasy;
+    margin: 0;
+ }
+ .bot{
+    color: #ffffff;
+    font-size: 20px;
+    
+}
+
+section{
+    
+    width: auto;
+    height:70vh;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    margin:0px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+}
+.contenUser{
+    margin-top: 40px;
+    width: 300px;
+    height: 200px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    
+}
+.contenUser1{
+    margin-top: 40px;
+    width: 300px;
+    height: 50px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    
+}
+.contenUser h3{
+    margin-bottom: 20px;
+    margin-top: 0%;
+}
+.regreDash{
+    background-color:#1270b0;
+    width: auto;
+    height: 30px;
+    margin: 0%;
+    padding: 5px;
+    position: relative;
+    top: 30px;
+    left:0px;
+    
+}
+#containerDas nav{
+    
+    width: 200px;
+    height: 95vh;
+    margin: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border-radius: 25px;
+    background-color: #fff;
+    
+}
+
+.dropdown img{
+    cursor: pointer;
+    border: 2px solid #1270b0;
+    border-radius: 20px;
+    background-color: #cdced9;
+
+}
+
+.dropdown{
+    position: relative;
+    display: inline-block;
+    
+    
+}
+
+.dropdown-menu{
+    display: none;
+    position: relative;
+    top: 0px;
+    left:43px;
+    background-color: #f5f8fa;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    width: 160px;
+    height: auto;
+    z-index: 1000;
+    text-align: start
+    ;
+}
+
+
+.dropdown-menu a{
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 10px;
+    color: #000;
+
+}
+.dropdown-menu a:hover{
+    background-color: #1270b0;
+}
+
+.dropdown-menu a:last-child{
+    border-bottom: none;
+}
+
+.dropdown:hover .dropdown-menu{
+    display: block;
+}
+
+.profile{
+    width: 40px;
+    position: relative;
+    left: 5px;
+    
+}
+
+header span {
+    color:#f6f7f7;
+    position: relative;
+    top:-5px;
+    left:0px;
+    font-size: 18px;
+    font-family:'Times New Roman', Times, serif;
+    cursor: pointer;
+}
+
+header div{
+    width: 50px;
+    height: 60px;
+    position: absolute;
+    right: 45px;
+    top: 10px;
+    
+}
+.span{
+    width: 200px;
+    height: 17px;
+    position: absolute;
+    top:20px;
+    right:2px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.logo-img{
+    width: 120px;
+    height: 80px;
+    position: relative;
+    left: 80px;
+    top:-10px;
+}
+/*Estilos de la tablas */
+.contenUser table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 25px;
+    
+    
+    
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    
+}
+
+table th {
+    background-color: #274d67;
+    color: #fff;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tr:hover {
+    background-color: #ddd;
+}
+.registroUser{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(145, 137, 137, 0.5);
+    
+    z-index: 9999;
+    
+}
+
+
+.form-regis{
+    color: #253c4b;
+    display: block;
+    text-align:center;
+    background-color: #fefefe;
+    width: auto;
+    max-width: 450px;
+    height: auto;
+    border-radius: 25px;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.5);
+    
+}
+.form-regis h3{
+    font-size: 30px;
+}
+
+.form-regis input{
+    width: 380px;
+    height: 25px;
+    margin: 10px;
+    border-radius: 25px;
+    border: solid 1px #a0b8c8;
+
+}
+.form-regis button{
+    padding: 5px;
+    margin:10px;
+    border-radius: 20px;
+    background-color: #1270b0;
+    color: #ededf2;
+    border: none;
+}
+.form-regis button a{
+    text-decoration: none;
+}
+
+
