@@ -2,7 +2,7 @@
 body{
     margin: 0%;
     padding: 0%;
-    background-color: #fcfcfc;
+    background-color: #f8f6f6;
 }
 #containerDas{
     width: 100%;
@@ -40,35 +40,46 @@ body{
 section{
     
     width: auto;
-    height:70vh;
-    background-color: #ffffff;
+    height:auto;
+    background-color: #cdcdcd;
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    padding: 20px;
+    padding: 50px;
     margin:0px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     border-radius: 25px;
 }
 .contenUser{
-    margin-top: 40px;
+    background-color: #d7e4eb;
+    
     width: 300px;
     height: 200px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     border-radius: 25px;
+    overflow-y: auto;
     
 }
 .contenUser1{
-    margin-top: 40px;
+    background-color: #d7e4eb;
+    
     width: 300px;
     height: 50px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     border-radius: 25px;
+    position: relative;
+    right: 200px;
     
 }
 .contenUser h3{
+    margin-bottom: 20px;
+    margin-top: 0%;
+    
+    
+}
+.contenUser1 h3{
     margin-bottom: 20px;
     margin-top: 0%;
 }
@@ -198,7 +209,7 @@ header div{
 }
 
 table th, table td {
-    border: 1px solid #ddd;
+    border: 1px solid #3b5b71;
     padding: 8px;
     text-align: center;
     

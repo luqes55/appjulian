@@ -14,16 +14,17 @@
         <div class="spiner"></div>
     </div>
    
-<header>
+<header >
     
     {% block header%}
-    <div id="reloj" style="position:absolute;left:570px;top:-4px;color:#fff;font-size:50px;font-family:Impact"></div>
+   
        <img src="{{ url_for('static', filename='images/logo2.svg') }}" class="logo-img" alt="soy la imagen">
-        
-       <button class="regre"><a href="{{ url_for('main.inicio') }}">
-        <img src="{{ url_for('static', filename='images/Vector.png') }}" >
-        Atras<a/> </button>
-        
+        {% if  show_button %}
+            <button class="regre"><a href="{{ url_for('main.inicio') }}">
+                <img src="{{ url_for('static', filename='images/Vector.png') }}" >
+                Inicio<a/> 
+            </button>
+        {% endif %}
        <div  class="dropdown">
         <img src="{{ url_for('static', filename='images/iconadmin1.png') }}" class="profile" >
         <div class="span"><span> Admin {{ current_user.usuario }}</span>
@@ -42,14 +43,14 @@
     {% endblock%}
 </header>
 
-<nav>
+<nav >
     {% block nav %}
     <div class="contenedor_nav">
         
         <button class="registro_nuevo"><a href="{{ url_for('main.register_cliente_dispositivo') }}">Registrar<a/> </button>
         
             <form class="busqueda" method="GET" action="{{ url_for('main.buscar') }}">
-                <input type="text" name="query" placeholder="Ejm: nombre,NIT o fecha de ingreso" required>
+                <input type="text" name="query" placeholder="nombre,Nit o fecha de ingreso" required>
                 <button class="buscal" type="submit">Buscar</button>
             </form>
     </div> 
@@ -80,16 +81,20 @@
         
         
         
-          
+    <!--************* botones para las tablas****************-->      
         
         <div class="vista-selector">
             <button id="clientes-btn" class="btn-toggle" onclick="mostrarClientes()">Clientes</button>
             <button id="dispositivos-btn" class="btn-toggle" onclick="mostrarDispositivos()">Dispositivos</button>
+            <button id="reportes-btn" class="btn-toggle" onclick="mostrarReporte()">Reporte final</button>
         </div>
+
+<!--*********************************** tabla clientes**************-->
 <div id="clientes-view" class="view">
-    <h3> Clientes registrados hoy</h3>
-    {% if clientes_hoy %}
     
+    {% if clientes_hoy %}
+    <div class="scrol">
+        <h3> Clientes registrados hoy</h3>
     
         <table>
             <thead>
@@ -105,12 +110,7 @@
                     <th style="width:50;">estado</th>
                     <th style=" width:30;">Actualizar</th>
                     <th style=" width:30;">ver</th>
-                    
-                   
-                    
-
-
-                    
+   
                 </tr>
             </thead>
             <tbody>
@@ -127,7 +127,7 @@
                         
                         <td>
                             <span class="estado {{'pendiente' if cliente.estado =='pendiente' else 'entregado'}}"
-                                onclick="abrirformulario({{cliente.idCliente}},'{{ cliente.estado}}')">
+                                onclick="abrirformulario({{cliente.idCliente}},'{{ cliente.estado}}',{{ cliente.dispositivos[0].idDispositivo }})">
 
                                 {{ cliente.estado }}
                             </span>
@@ -135,7 +135,9 @@
                         <td><button class="bo"><a href="{{ url_for('main.register_cliente_dispositivo', idCliente=cliente.idCliente) }}"><img style="margin-top:1px;width:23px;heigth:20px" src="{{ url_for('static', filename='images/actua.png') }}"></a></button></td>
                     
                         <td>
-                            <button class="bo"><a href="#"><img style="margin-top:1px;width:23px;heigth:20px" src="{{ url_for('static', filename='images/ver.png') }}"></a></button>
+                            <button class="bo" id="abre" onclick=({{cliente.idCliente}}) >
+                                <img style="margin-top:1px;width:23px;height:20px" src="{{ url_for('static', filename='images/ver.png') }}" alt="Ver">
+                            </button>
                             
                         </td>
                     </tr>
@@ -144,22 +146,20 @@
                 {% endfor %}
             </tbody>
         </table>
-         <!-- Paginación -->
-    <div class="pagination">
-        {% if prev_url %}
-            <a href="{{ prev_url }}">Anterior</a>
-        {% endif %}
-        {% if next_url %}
-            <a href="{{ next_url }}">Siguiente</a>
-        {% endif %}
-    </div>
+      
   
     {% else %}
         <p>No hay clientes registrados hoy.</p>
-    {% endif %}
+    </div>
+{% endif %}
+
+    
 </div>
+
+<!--¨************************************************* tabla dispositivos *************-->
 <div id="dispositivos-view" class="view" style="display: none;">
     {% if dispositivos_hoy %}
+    <div class="scroll">
     <h3>Dispositivos Registrados Hoy</h3>
     <table>
         <thead>
@@ -179,7 +179,7 @@
             {% for dispositivo in  dispositivos_hoy %}
                 <tr>
                     <td>{{ dispositivo.idDispositivo }}</td>
-                    <td>{{ dispositivo.idDispositivo }}</td>
+                    <td>{{ dispositivo.idCliente }}</td>
                     <td>{{ dispositivo.Imei }}</td>
                     <td>{{ dispositivo.marca }}</td>
                     <td>{{ dispositivo.modelo }}</td>
@@ -192,54 +192,180 @@
         </tbody>
     </table>
 
-    <!-- Paginación -->
-    <div class="pagination">
-        {% if prev_url %}
-            <a href="{{ prev_url }}">Anterior</a>
-        {% endif %}
-        {% if next_url %}
-            <a href="{{ next_url }}">Siguiente</a>
-        {% endif %}
-    </div>
+   
 
 {% else %}
     <p>No hay dispositivos registrados hoy.</p>
+</div>
 {% endif %}
 </div>
+
+<!--****************************************************** tabla reporte final************-->
+
+<div id="reporte-view" class="view" style="display: none;">
+    
+    {% if reportes_hoy %}
+    <div class="scroll1">
+    <h3>Reporte Final</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id reporte</th>
+                    <th>Id del dispositivo</th>
+                    <th>tecnico encargado</th>
+                    <th>Prov repuesto</th>
+                    <th>Nom. repuesto</th>
+                    <th>Fecha de entrega</th>
+                    <th>Valor repuesto</th>
+                    <th>Total</th>
+                    
+                    
+                    <!-- Agrega otras columnas que necesites -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for reporte in reportes_hoy %}
+                    <tr>
+                        <td>{{ reporte.idreporte }}</td>
+                        <td>{{ reporte.idDispositivo }}</td>
+                        <td>{{ reporte.tec_arregla }}</td>
+                        <td>{{ reporte.provedorRepuesto }}</td>
+                        <td>{{ reporte.nombreRepuesto }}</td>
+                        <td>{{ reporte.fechaEntrega }}</td>
+                        <td>{{ reporte.valorRepuesto}}</td>
+                        <td>{{ reporte.valorArreglo }}</td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <p>No hay reportes disponibles.</p>
+<div >
+    {% endif %}
+
+
 
 </div>
 {% endblock %}
 
 </div>
+
+<!--******************************************* Modal para el reporte final ********************-->
+
 <div id="modal-overlay" style="Display:none;"></div>
 <div id="modal" style="Display:none;">
-    <h3>Actualizar Estado</h3>
     
-    <form id="form-estado" method="POST" action="{{ url_for('main.actualizar_estado') }}">
+    
+    <form class="form-esta" method="POST" action="{{ url_for('main.actualizar_estado') }}">
         <div class="finalInfo">
-        <input type="hidden" id="cliente-id" name="cliente-id">
-        <label for="estado">Nuevo estado:</label>
-        <select name="estado" id="estado" required>
-            <option value="pendiente">Pendiente</option>
-            <option value="entregado">Entregado</option>
-        </select>
-        <input type="hidden" name="idDispositivo" >
-        <input type="text" name="tec_arregla" >
-        <input type="date" name="fechaEntrega" >
-        <input type="text" name="provedorRepuesto" >
-    </div>
+            <input type="hidden" id="cliente-id" name="cliente-id">
+            <input type="hidden" id="idDispositivo" name="idDispositivo" > 
+            <label for="estado">Nuevo estado:</label>
+            <select name="estado" id="estado" required>
+                <option value="pendiente" required>Pendiente</option>
+                <option value="entregado" required>Entregado</option>
+            </select>
+           
+            <label for="estado">tecnico encargado:</label>
+            <select type="text" name="tec_arregla"  required >
+                
+                <option value="juan" required>juan</option>
+                <option value="juan2" required>juan 2</option>
+            </select>
+            <label for="estado">Fecha de entrega:</label>
+            <input type="date" name="fechaEntrega" placeholder="fecha de entrega" required>
+            <label for="estado">Proveedor del repuesto:</label>
+            <select type="text" name="provedorRepuesto"  required >
+                
+                <option value="provedor1" required>repuesto juan</option>
+                <option value="provedor2" required>repuesto benito</option>
+            </select>
+        </div>
     <div class="finalInfo">
-       
-        <input type="number" name="valorRepuesto" >
-        <input type="text" name="nombreRepuesto" >
-        <input type="number" name="valorArreglo" >
+        <label for="estado">Valor del repuesto:</label>
+        <input type="number" name="valorRepuesto" placeholder="Valor del repuesto" required>
+        <label for="estado">Nombre del repuesto:</label>
+        <input type="text" name="nombreRepuesto" placeholder="Nombre del repuesto" required>
+        <label for="estado">Total Arreglo:</label>
+        <input type="number" name="valorArreglo" placeholder="Total arreglo" required>
         
     </div>
-        <button style="position:absolute;left:130" type="submit">Guardar</button>
-        <button style="position:absolute" type="button" onclick="cerrarModal()">Cerrar</button>
+    <div class="divBotones">
+        <button type="submit">Guardar</button>
+        <button type="button" onclick="cerrarModa()">Cerrar</button>
+    </div>
     </form>
-
 </div>
+
+<!--***************modal para ver toda la informacion*******************-->
+
+<!-- Modal -->
+<div id="modal-info" class="modal" style="display:none">
+    <div class="modal-content">
+        <span class="close" onclick="cerrarModal()">&times;</span>
+        <h3>Información Detallada</h3>
+
+        <div id="cliente-info">
+            <h4>Cliente</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>NIT</th>
+                        <th>Correo</th>
+                        <th>Dirección</th>
+                        <th>Teléfono</th>
+                    </tr>
+                </thead>
+                <tbody id="cliente-data"></tbody>
+            </table>
+        </div>
+
+        <div id="dispositivo-info">
+            <h4>Dispositivos</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id dispositivo</th>
+                        <th>Imei</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Color</th>
+                        <th>Persona recibió</th>
+                        <th>Detalles</th>
+                    </tr>
+                </thead>
+                <tbody id="dispositivo-data"></tbody>
+            </table>
+        </div>
+
+        <div id="reporte-info">
+            <h4>Reporte Final</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id reporte</th>
+                        <th>Id del dispositivo</th>
+                        <th>Técnico encargado</th>
+                        <th>Proveedor repuesto</th>
+                        <th>Nombre repuesto</th>
+                        <th>Fecha de entrega</th>
+                        <th>Valor repuesto</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="reporte-data"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 <script src="{{ url_for('static', filename='js/validacionApp.js') }}"></script>
 </body>

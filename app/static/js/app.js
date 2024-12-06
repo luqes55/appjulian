@@ -31,7 +31,7 @@
 
     /************ js para el formulario de final de el estado del registro *******/
    
-    function abrirformulario(clienteId, estadoActual) {
+    function abrirformulario(clienteId, estadoActual,idDispositivo) {
         if (estadoActual === "entregado") {
             // Si el estado es "Entregado", no mostrar el modal y mostrar una alerta
             alert('El estado ya está marcado como "Entregado" y no puede ser modificado.');
@@ -41,6 +41,7 @@
         // Establecer el cliente-id y el estado actual en el formulario
         document.getElementById('cliente-id').value = clienteId;
         document.getElementById('estado').value = estadoActual;
+        document.getElementById('idDispositivo').value = idDispositivo;
     
         // Obtener el campo de selección del estado
         const estadoSelect = document.getElementById('estado');
@@ -52,7 +53,7 @@
         document.getElementById('modal').style.display = 'block';
     }
     
-    function cerrarModal() {
+    function cerrarModa() {
         document.getElementById('modal-overlay').style.display = 'none';
         document.getElementById('modal').style.display = 'none';
     }
@@ -77,7 +78,7 @@
     
             if (respuesta.ok) {
                 alert(datos.mensaje);
-                cerrarModal();  
+                cerrarModa();  
             } else {
                 alert(datos.error || 'Hubo un problema al actualizar el estado.');
             }
@@ -162,33 +163,45 @@ history.pushState(null, null, location.href);
 
 
 /********* js para mostrar las paginas en inicio********* */
+function ocultarVistas() {
+    // Ocultar todas las vistas
+    document.querySelectorAll('.view').forEach(vista => vista.style.display = 'none');
+    // Quitar la clase activa de todos los botones
+    document.querySelectorAll('.btn-toggle').forEach(boton => boton.classList.remove('active'));
+}
 
 function mostrarClientes() {
-    // Ocultar la vista de dispositivos
-    document.getElementById('dispositivos-view').style.display = 'none';
-    // Mostrar la vista de clientes
+    ocultarVistas();
     document.getElementById('clientes-view').style.display = 'block';
-    
-    // Cambiar el estilo del botón seleccionado
     document.getElementById('clientes-btn').classList.add('active');
-    document.getElementById('dispositivos-btn').classList.remove('active');
 }
 
 function mostrarDispositivos() {
-    // Ocultar la vista de clientes
-    document.getElementById('clientes-view').style.display = 'none';
-    // Mostrar la vista de dispositivos
+    ocultarVistas();
     document.getElementById('dispositivos-view').style.display = 'block';
-    
-    // Cambiar el estilo del botón seleccionado
     document.getElementById('dispositivos-btn').classList.add('active');
-    document.getElementById('clientes-btn').classList.remove('active');
+}
+
+function mostrarReporte() {
+    ocultarVistas();
+    document.getElementById('reporte-view').style.display = 'block';
+    document.getElementById('reportes-btn').classList.add('active');
 }
 
 // Mostrar la vista de clientes por defecto
 mostrarClientes();
 
 
-/*************************************************************************/
+//******************************** */ modal de la tabla info *************/
 
+function abreModal() {
+
+    document.getElementById('modal-info').style.display = 'block';
+}
+
+document.getElementById('abre').addEventListener('click', abreModal);
+
+function cerrarModal() {
+    document.getElementById('modal-info').style.display = 'none';
+}
 

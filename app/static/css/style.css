@@ -247,6 +247,7 @@ header div{
     width:auto;
     height:75vh;
     padding: 0% 5%;
+   
     
 }
 
@@ -304,7 +305,7 @@ h3{
     position: relative;
     top:10px;
     
-    font-size: 30px;
+    font-size: 20px;
 }
 
 a{
@@ -324,13 +325,6 @@ h1.dasbo{
     margin-bottom: 20px;
     font-size: 38px;
 }
-
-
-
-
-
-
-
 .power{
     width: 70px;
     
@@ -346,11 +340,6 @@ h1.dasbo{
     margin-top: 10px;
     
 }
-
-
-
-
-
 
 span{
     color: #f8fcfb;
@@ -493,6 +482,7 @@ table {
     border-collapse: collapse;
     
     
+    
 }
 
 table th, table td {
@@ -529,7 +519,7 @@ form {
     height: auto;
     position: relative;
     left: 29%;
-    top: 10px;
+    top: 100px;
     
     
     
@@ -642,23 +632,29 @@ form button:hover {
     height: 100%;
     background-color: rgba(0,0,0,0.5);
     justify-content: center;
-    z-index: 9999;
+    z-index: 999;
+    
     
 }
 
 .modal-content {
     background-color: white;
-    padding: 10px;
     border-radius: 5px;
-    width: 600px;
+    width:600px !important;
     height: auto;
     text-align: center;
-    position: relative;
-    top: 100px;
-    left: 350px;
-    
-}
+    margin: auto;
+    padding: 0%;
+    position: absolute;
+    top: 250px !important;
 
+      
+}
+.modal-content h3{
+    width: 500px;
+    margin: 2%;
+ 
+}
 
 .modal-content input{
     width: 90%;  
@@ -729,57 +725,72 @@ form button:hover {
 
 #modal{
     display: none;
-    position: relative;
-    top:-400px;
-    left: 50%;
-    margin: 0%;
-    width: 1000px;
-    height: 600px;
-    padding: 7px;
-    transform: translate(-50%, -50%);
-    background: #ffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    border-radius: 10px;
+    width:100%;
+    height: 100%;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    background-color: rgba(0, 0, 0, 0.2); 
     z-index: 1000;
-    text-align: center;
     
-    
-}
-#modal h3{
-    margin: 0%;
 }
 
-#modal-overlay{
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:rgba(0, 0, 0, 0.5) ;
-    z-index: 1000;
-    padding: 0%;
-    
-}
- #form-estado{
+
+
+
+ .form-esta{
     display: flex;
-    gap: 20px;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
-    width: auto;
-    height: 75vh;
-    margin: 2%;
-    padding: 5px;
+    width: 600px;
+    height: 68vh;
+    margin: auto;
+    position: relative;
+    top: 100px;
+    border-radius: 30px;
+    
  }
 .finalInfo input{
-    width: 120px;
-    border:solid 2px #0c3def;
+    width: 200px;
+    border:solid 2px #848dad;
+    margin:15px;
+    border-radius: 20px;
 
 }
+.finalInfo select{
+    width: 200px;
+    height: 40px;
+    border:solid 2px #81879c;
+    margin:15px;
+    border-radius: 20px;
+}
+.finalInfo label{
+    margin: 0%;
+    width: 200px;
+}
 .finalInfo{
-    width: 50%;
-    border: solid 2px #1c202d;
+    width: 300px;
+    height: auto;
+    padding: 5px;
+    margin: 20px;
+    border-radius: 10px;
+    justify-content: center;
+    display:inline-block;
+    text-align: center;
+}
+.divBotones{
+    position: absolute;
+    bottom:20px;
+    
+}
+.divBotones button{
+    padding: 10px 20px;
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
 }
 
 .estado{
@@ -837,4 +848,72 @@ form button:hover {
  }
 
 
- 
+ /*********** stilos para el modal de la tabla info *******/
+
+#modal-info {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 800px;
+    overflow-y: auto;
+    max-height: 80%;
+   position: relative;
+   left: -70px;
+   top: -5%;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.btn-toggle{
+    background-color: #1270b0;
+}
+.btn-toggle:hover{
+    background-color: #1270b0;
+}
+
+/*************************************** estilo para los contenedores de las tablas******/
+
+.scrol{
+    overflow-y: auto;
+    max-height: 500px;
+}
+.scroll{
+    overflow-y: auto;
+    max-height: 500px;
+}
+.scroll1{
+    overflow-y: auto;
+    max-height: 500px;
+}

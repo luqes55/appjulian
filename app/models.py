@@ -63,9 +63,6 @@ class User(UserMixin, db.Model):
     def check_pin(self, pin):
         return self.pin == pin
     
-
-    def __repr__(self):
-        return f"user('{self.usuario}')"
     def __repr__(self):
         return f'<User {self.usuario}>'
 
@@ -81,5 +78,4 @@ class reportefinal(db.Model):
     nombreRepuesto=db.Column(db.String(20), nullable=False)
     valorArreglo=db.Column(db.Numeric(10, 2), nullable=False)
     
-    
-    
+    dispositivo = db.relationship('Dispositivo', backref='reportefinal', lazy=True)

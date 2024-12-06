@@ -92,12 +92,15 @@ def dashboard():
     fecha = date.today()
     hoy = date.today()
     usuarios_registrados = User.query.all()
+   
     
     
     clientes_hoy = Cliente.query.filter_by(fechaIngreso=hoy).all()
     dispositivos_hoy = Dispositivo.query.filter(Dispositivo.idCliente.in_([cliente.idCliente for cliente in clientes_hoy])).all()
     
-    return render_template('dashboard.html', page_title='Dashboard',clientes_hoy=clientes_hoy, dispositivos_hoy=dispositivos_hoy, fecha_hoy=fecha, usuarios=usuarios_registrados, hoy=hoy)
+    
+    
+    return render_template('dashboard.html', page_title='Dashboard',clientes_hoy=clientes_hoy, dispositivos_hoy=dispositivos_hoy, fecha_hoy=fecha, usuarios=usuarios_registrados, hoy=hoy,show_button=True)
     
 
 # Ruta para login   
@@ -154,26 +157,36 @@ def logout():
 @main.route('/register_cliente_dispositivo/<int:idCliente>', methods=['GET', 'POST'])
 @login_required
 def register_cliente_dispositivo(idCliente=None):
-    # Si tenemos un idCliente, estamos editando un cliente existente
+    cliente = None
+    dispositivo = None
+    
+    # Si hay un idCliente, buscamos al cliente y su dispositivo asociado para editar
     if idCliente:
         cliente = Cliente.query.get(idCliente)
         dispositivo = Dispositivo.query.filter_by(idCliente=idCliente).first()
         if not cliente:
             flash('Cliente no encontrado', 'error')
             return redirect(url_for('main.inicio'))
+        if not dispositivo:
+            flash('Dispositivo no encontrado', 'error')
+            return redirect(url_for('main.inicio'))
 
     if request.method == 'POST':
+        # Datos del cliente
         nombre = request.form.get('nombre')
         apellidos = request.form.get('apellidos')
         nit = request.form.get('nit')
         correo = request.form.get('correo')
         direccion = request.form.get('direccion')
         telefono = request.form.get('telefono')
+        fechaIngreso = request.form.get('fechaIngreso')
+        estado = request.form.get('estado')
+
+        # Datos del dispositivo
         marca = request.form.get('marca')
         modelo = request.form.get('modelo')
         detalles = request.form.get('detalles')
-        fechaIngreso = request.form.get('fechaIngreso')
-        IMEI = request.form.get('Imei')
+        Imei = request.form.get('Imei')
         per_recibe = request.form.get('per_recibe')
         clave_tel = request.form.get('clave_tel')
         abono = request.form.get('abono')
@@ -185,10 +198,9 @@ def register_cliente_dispositivo(idCliente=None):
         bandeja_sim = request.form.get('bandeja_sim')
         estuche = request.form.get('estuche')
         simcard = request.form.get('simcard')
-        estado = request.form.get('estado')
 
+        # Si estamos editando un cliente
         if idCliente:
-            # Editar el cliente existente
             cliente.nombre = nombre
             cliente.apellidos = apellidos
             cliente.nit = nit
@@ -201,7 +213,7 @@ def register_cliente_dispositivo(idCliente=None):
             dispositivo.marca = marca
             dispositivo.modelo = modelo
             dispositivo.detalles = detalles
-            dispositivo.Imei = IMEI
+            dispositivo.Imei = Imei
             dispositivo.per_recibe = per_recibe
             dispositivo.clave_tel = clave_tel
             dispositivo.abono = abono
@@ -217,13 +229,14 @@ def register_cliente_dispositivo(idCliente=None):
 
             flash('Cliente y dispositivo actualizados exitosamente!', 'success')
         else:
-            # Crear un nuevo cliente y dispositivo
-            nuevo_cliente = Cliente(nombre=nombre, apellidos=apellidos, nit=nit, correo=correo, direccion=direccion, telefono=telefono, fechaIngreso=fechaIngreso, estado=estado)
+            # Si no estamos editando, se crea un nuevo cliente y dispositivo
+            nuevo_cliente = Cliente(nombre=nombre, apellidos=apellidos, nit=nit, correo=correo, direccion=direccion,
+                                    telefono=telefono, fechaIngreso=fechaIngreso, estado=estado)
             db.session.add(nuevo_cliente)
             db.session.commit()
 
             dispositivo = Dispositivo(idCliente=nuevo_cliente.idCliente, marca=marca, modelo=modelo, detalles=detalles,
-                                      Imei=IMEI, per_recibe=per_recibe, clave_tel=clave_tel, abono=abono, color=color,
+                                      Imei=Imei, per_recibe=per_recibe, clave_tel=clave_tel, abono=abono, color=color,
                                       enciende=enciende, display_quebrado=display_quebrado, tapa_quebrada=tapa_quebrada,
                                       botones=botones, bandeja_sim=bandeja_sim, estuche=estuche, simcard=simcard)
             db.session.add(dispositivo)
@@ -231,14 +244,13 @@ def register_cliente_dispositivo(idCliente=None):
 
             flash('Cliente y dispositivo registrados exitosamente!', 'success')
 
-        return make_response(redirect(url_for('main.inicio')))
+        return redirect(url_for('main.inicio'))
 
-    # Si estamos editando, mostramos los datos actuales del cliente y dispositivo
+    # Si estamos editando, cargamos los datos del cliente y dispositivo
     if idCliente:
         return render_template('cliente.html', page_title='Editar Cliente', cliente=cliente, dispositivo=dispositivo)
-
-    # Si no es edición, simplemente cargamos un formulario vacío para nuevo cliente
-    return render_template('cliente.html', page_title='Nuevo Registro', fechaRegistro=date.today())
+    else:
+        return render_template('cliente.html', page_title='Nuevo Registro', cliente=None, dispositivo=None,  show_button=True)
 
 
 
@@ -256,12 +268,18 @@ def inicio():
     
     clientes_hoy = Cliente.query.filter_by(fechaIngreso=hoy).all()
     dispositivos_hoy = Dispositivo.query.filter(Dispositivo.idCliente.in_([cliente.idCliente for cliente in clientes_hoy])).all()
-
+    reportes_hoy= reportefinal.query.filter(reportefinal.idDispositivo.in_([dispositivo.idDispositivo for dispositivo in dispositivos_hoy])).all()
     print(clientes_hoy)
     print(dispositivos_hoy)
     
     
-    response = make_response(render_template('inicio.html', page_title='Dashboard',clientes_hoy=clientes_hoy, dispositivos_hoy=dispositivos_hoy, fecha_hoy=fecha, hoy=hoy))
+    response = make_response(render_template('inicio.html', 
+                                             page_title='Dashboard',
+                                             clientes_hoy=clientes_hoy,
+                                             dispositivos_hoy=dispositivos_hoy,
+                                             reportes_hoy=reportes_hoy,
+                                             fecha_hoy=fecha, hoy=hoy,
+                                             show_button=False))
     response.headers['Cache-Control'] = 'no-store'
     return response
 
@@ -272,7 +290,7 @@ def inicio():
 def actualizar_estado():
     if request.method == 'POST':
         
-        idReporte = request.form.get('idReporte')
+        
         idDispositivo = request.form.get('idDispositivo')
         tec_arregla = request.form.get('tec_arregla')
         fechaEntrega = request.form.get('fechaEntrega')
@@ -302,6 +320,7 @@ def actualizar_estado():
 
                         # Crear un nuevo objeto ReporteFinal
                         reporte = reportefinal(
+                           
                             idDispositivo=idDispositivo,
                             tec_arregla=tec_arregla,
                             fechaEntrega=fecha_entrega,
@@ -348,16 +367,11 @@ def buscar():
         flash('no se encontro ninguna coincidencia, por favor intente nueva mente','warning' )
     
     response = make_response(render_template('resultado_busqueda.html', page_title='buscar', 
-                           cliente_results=cliente_results))
+                           cliente_results=cliente_results,show_button=True))
     response.headers['Cache-Control'] = 'no-store'
     return response
     
-"""
-    # Si se encuentran clientes, buscar dispositivos relacionados con cada cliente
-    if cliente_results:
-        for dispositivos in cliente_results:
-            dispositivos = Dispositivo.query.filter_by(idCliente=Dispositivo.idCliente).all()
-            cliente_results=dispositivos  # Agregar los dispositivos encontrados a la lista
-"""
+
+
     
 
