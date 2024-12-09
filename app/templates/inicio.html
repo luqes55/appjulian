@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}APP JULIAN |Inicio{% endblock %}</title> 
+    <title>{% block title %}APP JULIAN | Inicio{% endblock %}</title> 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styloDash.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style_form_registro.css') }}">
@@ -85,15 +85,14 @@
         
         <div class="vista-selector">
             <button id="clientes-btn" class="btn-toggle" onclick="mostrarClientes()">Clientes</button>
-            <button id="dispositivos-btn" class="btn-toggle" onclick="mostrarDispositivos()">Dispositivos</button>
-            <button id="reportes-btn" class="btn-toggle" onclick="mostrarReporte()">Reporte final</button>
+            <button id="pendientes-btn" class="btn-toggle" onclick="mostrarPendientes()">Pendientes</button>
         </div>
 
 <!--*********************************** tabla clientes**************-->
 <div id="clientes-view" class="view">
     
     {% if clientes_hoy %}
-    <div class="scrol">
+         
         <h3> Clientes registrados hoy</h3>
     
         <table>
@@ -135,7 +134,7 @@
                         <td><button class="bo"><a href="{{ url_for('main.register_cliente_dispositivo', idCliente=cliente.idCliente) }}"><img style="margin-top:1px;width:23px;heigth:20px" src="{{ url_for('static', filename='images/actua.png') }}"></a></button></td>
                     
                         <td>
-                            <button class="bo" id="abre" onclick=({{cliente.idCliente}}) >
+                            <button class="bo" onclick="abremodal({{cliente.idCliente}})" >
                                 <img style="margin-top:1px;width:23px;height:20px" src="{{ url_for('static', filename='images/ver.png') }}" alt="Ver">
                             </button>
                             
@@ -150,107 +149,56 @@
   
     {% else %}
         <p>No hay clientes registrados hoy.</p>
-    </div>
-{% endif %}
-
-    
-</div>
-
-<!--¨************************************************* tabla dispositivos *************-->
-<div id="dispositivos-view" class="view" style="display: none;">
-    {% if dispositivos_hoy %}
-    <div class="scroll">
-    <h3>Dispositivos Registrados Hoy</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Id dispositivo</th>
-                <th>id cliente</th>
-                <th>Imei</th>
-                <th>marca</th>
-                <th>modelo</th>
-                <th>color</th>
-                <th>persona recibio</th>
-                <th>detalles</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            {% for dispositivo in  dispositivos_hoy %}
-                <tr>
-                    <td>{{ dispositivo.idDispositivo }}</td>
-                    <td>{{ dispositivo.idCliente }}</td>
-                    <td>{{ dispositivo.Imei }}</td>
-                    <td>{{ dispositivo.marca }}</td>
-                    <td>{{ dispositivo.modelo }}</td>
-                    <td>{{ dispositivo.color}}</td>
-                    <td>{{ dispositivo.per_recibe }}</td>
-                    <td>{{ dispositivo.detalles }}</td>
-                    
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
    
-
-{% else %}
-    <p>No hay dispositivos registrados hoy.</p>
-</div>
 {% endif %}
+    
 </div>
 
-<!--****************************************************** tabla reporte final************-->
-
-<div id="reporte-view" class="view" style="display: none;">
-    
-    {% if reportes_hoy %}
-    <div class="scroll1">
-    <h3>Reporte Final</h3>
+<!-- Tabla de pendientes -->
+<div id="pendientes-view" class="view" style="display:none;">
+    <div class="scrol">
+        {% if clientes_pendientes %}
+        <h3>Clientes Pendientes</h3>
         <table>
             <thead>
                 <tr>
-                    <th>Id reporte</th>
-                    <th>Id del dispositivo</th>
-                    <th>tecnico encargado</th>
-                    <th>Prov repuesto</th>
-                    <th>Nom. repuesto</th>
-                    <th>Fecha de entrega</th>
-                    <th>Valor repuesto</th>
-                    <th>Total</th>
-                    
-                    
-                    <!-- Agrega otras columnas que necesites -->
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>NIT</th>
+                    <th>Correo</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Fecha de Ingreso</th>
+                    <th>Estado</th>
+                    <th>Actualizar</th>
                 </tr>
             </thead>
             <tbody>
-                {% for reporte in reportes_hoy %}
-                    <tr>
-                        <td>{{ reporte.idreporte }}</td>
-                        <td>{{ reporte.idDispositivo }}</td>
-                        <td>{{ reporte.tec_arregla }}</td>
-                        <td>{{ reporte.provedorRepuesto }}</td>
-                        <td>{{ reporte.nombreRepuesto }}</td>
-                        <td>{{ reporte.fechaEntrega }}</td>
-                        <td>{{ reporte.valorRepuesto}}</td>
-                        <td>{{ reporte.valorArreglo }}</td>
-                        
-                    </tr>
+                {% for cliente in clientes_pendientes %}
+                <tr>
+                    <td>{{ cliente.idCliente }}</td>
+                    <td>{{ cliente.nombre }}</td>
+                    <td>{{ cliente.apellidos }}</td>
+                    <td>{{ cliente.nit }}</td>
+                    <td>{{ cliente.correo }}</td>
+                    <td>{{ cliente.direccion }}</td>
+                    <td>{{ cliente.telefono }}</td>
+                    <td>{{ cliente.fechaIngreso }}</td>
+                    <td>{{ cliente.estado }}</td>
+                    <td>
+                        <button class="bo"><a href="{{ url_for('main.register_cliente_dispositivo', idCliente=cliente.idCliente) }}"><img style="margin-top:1px;width:23px;heigth:20px" src="{{ url_for('static', filename='images/actua.png') }}"></a></button>
+                    </td>
+                </tr>
                 {% endfor %}
             </tbody>
         </table>
-
-    {% else %}
-        <p>No hay reportes disponibles.</p>
-<div >
-    {% endif %}
-
-
-
+        {% endif %}
+    </div>
 </div>
-{% endblock %}
+{% endblock%}
 
-</div>
+
 
 <!--******************************************* Modal para el reporte final ********************-->
 
@@ -302,68 +250,30 @@
 <!--***************modal para ver toda la informacion*******************-->
 
 <!-- Modal -->
-<div id="modal-info" class="modal" style="display:none">
-    <div class="modal-content">
-        <span class="close" onclick="cerrarModal()">&times;</span>
+<div id="info-all" class="modal" style="display:none">
+    <div class="modal-conte">
         <h3>Información Detallada</h3>
-
         <div id="cliente-info">
             <h4>Cliente</h4>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Apellidos</th>
-                        <th>NIT</th>
-                        <th>Correo</th>
-                        <th>Dirección</th>
-                        <th>Teléfono</th>
-                    </tr>
-                </thead>
-                <tbody id="cliente-data"></tbody>
-            </table>
+            
+            
+     
         </div>
 
         <div id="dispositivo-info">
             <h4>Dispositivos</h4>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Id dispositivo</th>
-                        <th>Imei</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
-                        <th>Color</th>
-                        <th>Persona recibió</th>
-                        <th>Detalles</th>
-                    </tr>
-                </thead>
-                <tbody id="dispositivo-data"></tbody>
-            </table>
+            
+            
         </div>
 
         <div id="reporte-info">
             <h4>Reporte Final</h4>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Id reporte</th>
-                        <th>Id del dispositivo</th>
-                        <th>Técnico encargado</th>
-                        <th>Proveedor repuesto</th>
-                        <th>Nombre repuesto</th>
-                        <th>Fecha de entrega</th>
-                        <th>Valor repuesto</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody id="reporte-data"></tbody>
-            </table>
+            
+    
         </div>
+        <button onclick="cerrarmodal()">cerrar</button>
     </div>
 </div>
-
 
 
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>

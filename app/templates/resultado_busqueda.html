@@ -31,6 +31,7 @@
                     <th>direccion</th>
                     <th>Telefono</th>
                     <th>Fecha de registro</th>
+                    <th>ver</th>
                   
 
                     <!-- Añadir más columnas según sea necesario -->
@@ -38,16 +39,22 @@
 
             </thead>
             <tbody>
-                {% for resultado in cliente_results %}
+                {% for cliente in cliente_results %}
                 <tr>
-                    <td>{{ resultado.idCliente }}</td>
-                    <td>{{ resultado.nombre }}</td>
-                    <td>{{ resultado.apellidos}}</td>
-                    <td>{{ resultado.nit }}</td>
-                    <td>{{ resultado.correo }}</td>
-                    <td>{{ resultado.direccion}}</td>
-                    <td>{{ resultado.telefono}}</td>
-                    <td>{{ resultado.fechaIngreso}}</td>
+                    <td>{{ cliente.idCliente }}</td>
+                    <td>{{ cliente.nombre }}</td>
+                    <td>{{ cliente.apellidos}}</td>
+                    <td>{{ cliente.nit }}</td>
+                    <td>{{ cliente.correo }}</td>
+                    <td>{{ cliente.direccion}}</td>
+                    <td>{{ cliente.telefono}}</td>
+                    <td>{{ cliente.fechaIngreso}}</td>
+                    <td>
+                        <button class="bo" onclick="abremodal({{cliente.idCliente}})">
+                            <img style="margin-top:1px;width:23px;height:20px" src="{{ url_for('static', filename='images/ver.png') }}" alt="Ver">
+                        </button>
+                        
+                    </td>
                     
                     <!-- Añadir más columnas según sea necesario -->
                 </tr>
@@ -60,7 +67,33 @@
     {% endif %}
         
     </div>
+    
     {% endblock %}
+    <!-- Modal -->
+<div id="info-all" class="modal" style="display:none">
+    <div class="modal-conte">
+        <h3>Información Detallada</h3>
+        <div id="cliente-info">
+            <h4>Cliente</h4>
+            
+            
+     
+        </div>
+
+        <div id="dispositivo-info">
+            <h4>Dispositivos</h4>
+            
+            
+        </div>
+
+        <div id="reporte-info">
+            <h4>Reporte Final</h4>
+            
+    
+        </div>
+        <button onclick="cerrarmodal()">cerrar</button>
+    </div>
+</div>
     
 
 

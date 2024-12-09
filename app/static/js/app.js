@@ -110,7 +110,21 @@ document.querySelectorAll('a').forEach(function(link){
         setTimeout(() =>{
             window.location.href=href;
             ocultarLoader();
-        }, 1200);
+        }, 2000);
+    });
+});
+
+document.querySelectorAll('button').forEach(function(link){
+    link.addEventListener('click', function(event){
+        event.preventDefault();
+        const href=link.getAttribute('href');
+        console.log('loader activado');
+        showLoader();
+
+        setTimeout(() =>{
+            window.location.href=href;
+            ocultarLoader();
+        }, 2000);
     });
 });
 
@@ -125,9 +139,14 @@ document.querySelectorAll('form').forEach(function(form){
         showLoader();
         setTimeout(() =>{
             form.submit();
-        },1200);
+        },2000);
     });
 });
+
+window.addEventListener('beforeunload', function(){
+    showLoader();
+});
+
 
 /*********************************js para el reloj *****************/
 
@@ -152,14 +171,6 @@ setInterval(actualizarReloj, 1000);
 actualizarReloj();
 
 
- // Captura el evento de navegación hacia atrás
- window.onpopstate = function(event) {
-    // Redirige a la página de inicio
-    window.location.href = '/';  // Cambia '/' a la URL de tu página de inicio
-};
-
-// Agrega un nuevo estado al historial para evitar que el usuario vuelva atrás
-history.pushState(null, null, location.href);
 
 
 /********* js para mostrar las paginas en inicio********* */
@@ -174,19 +185,19 @@ function mostrarClientes() {
     ocultarVistas();
     document.getElementById('clientes-view').style.display = 'block';
     document.getElementById('clientes-btn').classList.add('active');
+
+    setTimeout(()=>{
+        document.getElementById('clientes-view').style.display='block';
+    },50);
 }
 
-function mostrarDispositivos() {
-    ocultarVistas();
-    document.getElementById('dispositivos-view').style.display = 'block';
-    document.getElementById('dispositivos-btn').classList.add('active');
+function mostrarPendientes() {
+    document.getElementById('clientes-view').style.display = 'none';
+    document.getElementById('pendientes-view').style.display = 'block';
 }
 
-function mostrarReporte() {
-    ocultarVistas();
-    document.getElementById('reporte-view').style.display = 'block';
-    document.getElementById('reportes-btn').classList.add('active');
-}
+
+
 
 // Mostrar la vista de clientes por defecto
 mostrarClientes();
@@ -194,14 +205,161 @@ mostrarClientes();
 
 //******************************** */ modal de la tabla info *************/
 
-function abreModal() {
 
-    document.getElementById('modal-info').style.display = 'block';
+  
+  function cerrarmodal() {
+    document.getElementById('info-all').style.display = 'none';
+   
+  }
+  function abremodal(idCliente) {
+    fetch(`/get_cliente_info/${idCliente}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            } else {
+                // Actualiza la sección del cliente
+                if (data.cliente) {
+                    let clienteHTML = `
+                        <h4>Cliente</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID Cliente</th>
+                                    <th>Nombre</th>
+                                    <th>Apellidos</th>
+                                    <th>NIT</th>
+                                    <th>Correo</th>
+                                    <th>Dirección</th>
+                                    <th>Teléfono</th>
+                                    <th>fecha de ingreso</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>${data.cliente.idCliente}</td>
+                                    <td>${data.cliente.nombre}</td>
+                                    <td>${data.cliente.apellidos}</td>
+                                    <td>${data.cliente.nit}</td>
+                                    <td>${data.cliente.correo}</td>
+                                    <td>${data.cliente.direccion}</td>
+                                    <td>${data.cliente.telefono}</td>
+                                    <td>${data.cliente.fechaIngreso}</td>
+                                    
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    `;
+                    document.getElementById('cliente-info').innerHTML = clienteHTML;
+            } else {
+    document.getElementById('cliente-info').innerHTML = '<h4>Cliente</h4><p>No se encontró información del cliente.</p>';
+}
+                // Actualiza la sección de dispositivos
+                if (data.dispositivos.length > 0) {
+                    let dispositivosHTML = `
+                        <h4>Dispositivos</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID Cliente</th>
+                                    <th>ID Dispositivo</th>
+                                    <th>Marca</th>
+                                    <th>Modelo</th>
+                                    <th>IMEI</th>
+                                    <th>color</th>
+                                    <th>abono</th>
+                                    <th>detalles</th>
+                                    
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                    `;
+                    data.dispositivos.forEach(dispositivo => {
+                        dispositivosHTML += `
+                            <tr>
+                            <td> ${dispositivo.idCliente}</td>
+                                <td>${dispositivo.idDispositivo}</td>
+                                <td>${dispositivo.marca}</td>
+                                <td>${dispositivo.modelo}</td>
+                                <td>${dispositivo.Imei}</td>
+                                <td>${dispositivo.color}</td>
+                                <td>$ ${dispositivo.abono}</td>
+                                <td>${dispositivo.detalles}</td>
+                                
+                                
+                                
+                            </tr>
+                        `;
+                    });
+                    dispositivosHTML += '</tbody></table>';
+                    document.getElementById('dispositivo-info').innerHTML = dispositivosHTML;
+                } else {
+                    document.getElementById('dispositivo-info').innerHTML = '<h4>Dispositivos</h4><p>No hay dispositivos registrados.</p>';
+                }
+
+                // Actualiza la sección de reportes
+                if (data.reportes.length > 0) {
+                    let reportesHTML = `
+                        <h4>Reporte Final</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID Reporte</th>
+                                    <th>ID Dispositivo</th>
+                                    <th>Técnico Encargado</th>
+                                    <th>Proveedor Repuesto</th>
+                                    <th>Nombre Repuesto</th>
+                                    <th>Fecha Entrega</th>
+                                    <th>Valor Repuesto</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    `;
+                    data.reportes.forEach(reporte => {
+                        reportesHTML += `
+                            <tr>
+                                <td>${reporte.idReporte}</td>
+                                <td>${reporte.idDispositivo}</td>
+                                <td>${reporte.tec_arregla}</td>
+                                <td>${reporte.provedorRepuesto}</td>
+                                <td>${reporte.nombreRepuesto}</td>
+                                <td>${reporte.fechaEntrega}</td>
+                                <td>${reporte.valorRepuesto}</td>
+                                <td>${reporte.valorArreglo}</td>
+                            </tr>
+                        `;
+                    });
+                    reportesHTML += '</tbody></table>';
+                    document.getElementById('reporte-info').innerHTML = reportesHTML;
+                } else {
+                    document.getElementById('reporte-info').innerHTML = '<h4>Reporte Final</h4>';
+                }
+            }
+
+            // Muestra el modal
+            document.getElementById('info-all').style.display = 'block';
+        })
+        .catch(error => console.error('Error:', error));
 }
 
-document.getElementById('abre').addEventListener('click', abreModal);
 
-function cerrarModal() {
-    document.getElementById('modal-info').style.display = 'none';
+function actualizarEstado(idCliente) {
+    fetch(`/actualizar_estado/${idCliente}`, {
+        method: 'POST',
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message) {
+            alert(data.message);
+            // Actualiza la interfaz para quitar el cliente de pendientes
+            location.reload();  // Recarga la página para reflejar los cambios
+        } else {
+            alert('Error al actualizar el estado');
+        }
+    })
+    .catch(error => console.error('Error:', error));
 }
-

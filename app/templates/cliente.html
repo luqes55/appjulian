@@ -19,7 +19,7 @@
 {% block content %}
 
 <!-- Formulario combinado de Cliente y Dispositivo -->
-<form id="clien" action="{{ url_for('main.register_cliente_dispositivo') }}" method="post" onsubmit="return validarFormulario()">
+<form id="clien" action="{{ url_for('main.register_cliente_dispositivo', idCliente=cliente.idCliente if cliente else none) }}" method="post" onsubmit="return validarFormulario()">
     <div class="clien">
         <!-- Datos del Cliente -->
         <fieldset class="fiel">
@@ -80,7 +80,7 @@
                 <div>
                     <select id="marca" name="marca" required>
                         <option value="">Marca del telefono</option>
-                        <option value="{{ dispositivo.marca }}" style="display:none;">{{ dispositivo.marca }}</option>
+                        <option value="{{ dispositivo.marca }}" >{{ dispositivo.marca }}</option>
                         <option value="Iphone">Iphone</option>
                         <option value="Samsung">Samsung</option>
                         <option value="Motorola">Motorola</option>
@@ -93,7 +93,7 @@
                 <div>
                     <select id="per_recibe" name="per_recibe" required>
                         <option value="">Quien lo recibe?</option>
-                        <option value="{{ dispositivo.per_recibe }}" style="display:none;">{{ dispositivo.per_recibe }}</option>
+                        <option value="{{ dispositivo.per_recibe }}" >{{ dispositivo.per_recibe }}</option>
                         <option value="Julian">Julian</option>
                         <option value="Camila">Camila</option>
                         <option value="Manuel">Manuel</option>
@@ -102,7 +102,7 @@
                 <div>
                     <select id="color" name="color" required>
                         <option value="">Color del telefono</option>
-                        <option value="{{ dispositivo.color }}" style="display:none;">{{ dispositivo.color }}</option>
+                        <option value="{{ dispositivo.color }}" >{{ dispositivo.color }}</option>
                         <option value="amarillo">Amarillo</option>
                         <option value="verde">Verde</option>
                         <option value="azul">Azul</option>
@@ -112,7 +112,7 @@
                 <div>
                     <select id="display_quebrado" name="display_quebrado" required>
                         <option value="">Estado del display</option>
-                        <option value="{{ dispositivo.display_quebrado }}" style="display:none;">{{ dispositivo.display_quebrado }}</option>
+                        <option value="{{ dispositivo.display_quebrado }}">{{ dispositivo.display_quebrado }}</option>
                         <option value="bueno">Bueno</option>
                         <option value="rayado">Rayado</option>
                         <option value="quebrado">Quebrado</option>
@@ -121,7 +121,7 @@
                 <div>
                     <select id="tapa_quebrada" name="tapa_quebrada" required>
                         <option value="">Estado de la tapa</option>
-                        <option value="{{ dispositivo.tapa_quebrada }}" style="display:none;">{{ dispositivo.tapa_quebrada }}</option>
+                        <option value="{{ dispositivo.tapa_quebrada }}" >{{ dispositivo.tapa_quebrada }}</option>
                         <option value="buena">Buena</option>
                         <option value="rayada">Rayada</option>
                         <option value="quebrada">Quebrada</option>
@@ -134,7 +134,7 @@
                 <div>
                     <select id="enciende" name="enciende" required>
                         <option value="">Telefono enciende</option>
-                        <option value="{{ dispositivo.enciende }}"  style="display:none;">{{ dispositivo.enciende }}</option>
+                        <option value="{{ dispositivo.enciende }}"  >{{ dispositivo.enciende }}</option>
                         <option value="si">Sí</option>
                         <option value="no">No</option>
                     </select>
@@ -142,7 +142,7 @@
                 <div>
                     <select id="botones" name="botones" required>
                         <option value="">Trae todos sus botones</option>
-                        <option value="{{ dispositivo.botones }}" style="display:none;">{{ dispositivo.botones }}</option>
+                        <option value="{{ dispositivo.botones }}">{{ dispositivo.botones }}</option>
                         <option value="si">Sí</option>
                         <option value="no">No</option>
                     </select>
@@ -150,7 +150,7 @@
                 <div>
                     <select id="bandeja_sim" name="bandeja_sim" required>
                         <option value="">Trae la bandeja Simc</option>
-                        <option value="{{ dispositivo.bandeja_sim }}" style="display:none;">{{ dispositivo.bandeja_sim }}</option>
+                        <option value="{{ dispositivo.bandeja_sim }}" >{{ dispositivo.bandeja_sim }}</option>
                         <option value="si">Sí</option>
                         <option value="no">No</option>
                     </select>
@@ -158,7 +158,7 @@
                 <div>
                     <select id="estuche" name="estuche" required>
                         <option value="">Trae estuche</option>
-                        <option value="{{ dispositivo.estuche }}" style="display:none;">{{ dispositivo.estuche }}</option>
+                        <option value="{{ dispositivo.estuche }}">{{ dispositivo.estuche }}</option>
                         <option value="si">Sí</option>
                         <option value="no">No</option>
                     </select>
@@ -166,7 +166,7 @@
                 <div>
                     <select id="simcard" name="simcard" required>
                         <option value="">Trae la simcard</option>
-                        <option value="{{ dispositivo.simcard }}" style="display:none;">{{ dispositivo.simcard }}</option>
+                        <option value="{{ dispositivo.simcard }}" >{{ dispositivo.simcard }}</option>
                         <option value="si">Sí</option>
                         <option value="no">No</option>
                     </select>
@@ -178,6 +178,11 @@
     <div>
         <textarea id="detalles" name="detalles" placeholder="Detalles del dispositivo" required>{{ dispositivo.detalles }}</textarea>
     </div>
+
+    {% if cliente %}
+    <input type="hidden" name="idCliente" value="{{ cliente.idCliente }}">
+    {% endif %}
+
     <div class="but">
         <button class="guarda" type="submit">Guardar</button>
         <button class="cancelar" type="reset"><a href="{{ url_for('main.inicio') }}">Cancelar</a></button>

@@ -8,7 +8,7 @@ from .models import Cliente, reportefinal
 
 
 
-# Blueprint en lugar de usar directamente 'app'
+# Blueprint main en lugar de usar  'app'
 main = Blueprint('main', __name__)
 
 
@@ -21,7 +21,8 @@ def register_user():
     if request.method == 'POST':
         usuario = request.form['usuario']
         password = request.form['password']
-        pin = request.form['pin']  # Captura el PIN
+        pin = request.form['pin']  
+        
 
         # Verificar si el usuario ya existe
         existing_user = User.query.filter_by(usuario=usuario).first()
@@ -51,13 +52,13 @@ def register_user():
 @main.route('/validate_pin', methods=['POST'])
 @login_required
 def validate_pin():
-    pin = request.form.get('pin')  # Usamos `get()` para evitar errores si la clave no existe
+    pin = request.form.get('pin')  
 
     if pin is None:
         flash('Por favor, ingrese un PIN.', 'danger')
         return redirect(url_for('main.dashboard'))
     
-    if current_user.check_pin(pin):  # Asegúrate de que esta función esté bien implementada
+    if current_user.check_pin(pin): 
         flash('PIN correcto.', 'success')
         return redirect(url_for('main.register_user'))
     else:
@@ -199,8 +200,8 @@ def register_cliente_dispositivo(idCliente=None):
         estuche = request.form.get('estuche')
         simcard = request.form.get('simcard')
 
-        # Si estamos editando un cliente
         if idCliente:
+            # Si estamos editando un cliente
             cliente.nombre = nombre
             cliente.apellidos = apellidos
             cliente.nit = nit
@@ -225,6 +226,7 @@ def register_cliente_dispositivo(idCliente=None):
             dispositivo.bandeja_sim = bandeja_sim
             dispositivo.estuche = estuche
             dispositivo.simcard = simcard
+
             db.session.commit()
 
             flash('Cliente y dispositivo actualizados exitosamente!', 'success')
@@ -243,28 +245,103 @@ def register_cliente_dispositivo(idCliente=None):
             db.session.commit()
 
             flash('Cliente y dispositivo registrados exitosamente!', 'success')
-
+            
         return redirect(url_for('main.inicio'))
 
     # Si estamos editando, cargamos los datos del cliente y dispositivo
-    if idCliente:
-        return render_template('cliente.html', page_title='Editar Cliente', cliente=cliente, dispositivo=dispositivo)
-    else:
-        return render_template('cliente.html', page_title='Nuevo Registro', cliente=None, dispositivo=None,  show_button=True)
+    return render_template('cliente.html', page_title='Editar Cliente' if idCliente else 'Nuevo Registro',
+                           cliente=cliente, dispositivo=dispositivo, show_button=True if not idCliente else False)
 
 
+@main.route('/get_cliente_info/<int:idCliente>', methods=['GET'])
+def get_cliente_info(idCliente):
+    try:
+        # Obtener la información del cliente
+        cliente = Cliente.query.get(idCliente)
+        if not cliente:
+            return jsonify({"error": "Cliente no encontrado"}), 404
 
+        # Obtener los dispositivos del cliente
+        dispositivos = Dispositivo.query.filter_by(idCliente=idCliente).all()
+        if not dispositivos:
+            return jsonify({"error": "Dispositivos no encontrados"}), 404
 
+        # Obtener los IDs de los dispositivos
+        dispositivos_ids = [d.idDispositivo for d in dispositivos]
 
+        # Obtener los reportes asociados a esos dispositivos
+        reportes = reportefinal.query.filter(reportefinal.idDispositivo.in_(dispositivos_ids)).all()
+
+        # Formatear los datos del cliente
+        cliente_data = {
+            "idCliente": cliente.idCliente,
+            "nombre": cliente.nombre,
+            "apellidos": cliente.apellidos,
+            "nit": cliente.nit,
+            "correo": cliente.correo,
+            "direccion": cliente.direccion,
+            "telefono": cliente.telefono,
+            "fechaIngreso": cliente.fechaIngreso.strftime("%d/%m/%Y") if cliente.fechaIngreso else None,
+
+            
+            
+        }
+
+        # Formatear los datos de dispositivos
+        dispositivos_data = [
+            {
+                "idDispositivo": dispositivo.idDispositivo,
+                "idCliente": dispositivo.idCliente,
+                "marca": dispositivo.marca,
+                "modelo": dispositivo.modelo,
+                "Imei": dispositivo.Imei,
+                "color": dispositivo.color,
+                "abono": dispositivo.abono,
+                "detalles": dispositivo.detalles,
+                
+            }
+            for dispositivo in dispositivos
+        ]
+
+        # Formatear los datos de reportes
+        reportes_data = [
+            {
+                "idReporte": reporte.idreporte,
+                "idDispositivo": reporte.idDispositivo,
+                "tec_arregla": reporte.tec_arregla,
+                "provedorRepuesto": reporte.provedorRepuesto,
+                "nombreRepuesto": reporte.nombreRepuesto,
+                "fechaEntrega": reporte.fechaEntrega.strftime("%d/%m/%Y") if reporte.fechaEntrega else None,
+                "valorRepuesto": reporte.valorRepuesto,
+                "valorArreglo": reporte.valorArreglo,
+            }
+            for reporte in reportes
+        ]
+
+        # Construir la respuesta
+        response = {
+            "cliente": cliente_data,
+            "dispositivos": dispositivos_data,
+            "reportes": reportes_data,
+        }
+
+        return jsonify(response), 200
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({"error": "Error al obtener la información"}), 500
 
 
 # Ruta de la página de inicio del dashboard
+
 @main.route('/inicio')
 @login_required
 def inicio():
     fecha = date.today()
     hoy = date.today()
     
+    
+
     
     clientes_hoy = Cliente.query.filter_by(fechaIngreso=hoy).all()
     dispositivos_hoy = Dispositivo.query.filter(Dispositivo.idCliente.in_([cliente.idCliente for cliente in clientes_hoy])).all()

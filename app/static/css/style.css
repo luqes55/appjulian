@@ -645,7 +645,7 @@ form button:hover {
     text-align: center;
     margin: auto;
     padding: 0%;
-    position: absolute;
+    position: relative;
     top: 250px !important;
 
       
@@ -863,19 +863,32 @@ form button:hover {
     display: none;
 }
 
-.modal-content {
-    background: #fff;
+.modal-conte {
+    text-align: center;
+    background: #ededf0;
     padding: 20px;
     border-radius: 5px;
-    width: 90%;
-    max-width: 800px;
+    width:auto;
+    max-width: 950px;
     overflow-y: auto;
     max-height: 80%;
-   position: relative;
-   left: -70px;
-   top: -5%;
+   position:relative;
+   top: 100px;
+   margin:auto !important;
 }
-
+.modal-conte h2 {
+    margin-top: 0;
+} 
+.modal-conte button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    left: -100px;
+}
 .close {
     position: absolute;
     top: 10px;
@@ -912,6 +925,7 @@ th, td {
 .scroll{
     overflow-y: auto;
     max-height: 500px;
+
 }
 .scroll1{
     overflow-y: auto;
